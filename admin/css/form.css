@@ -1,0 +1,12 @@
+/* --Start of my Form-- */
+.myform{margin:0 auto;width:400px;padding:14px;}
+#stylized{border:solid 1px #D6D5D5;border-radius: 10px;background:#FFF;}
+#stylized h1 {font-size:14px;font-weight:bold;margin-bottom:8px;}
+#stylized p{font-size:11px;color:#FFF;margin-bottom:20px;border-bottom:solid 1px #202020;padding-bottom:10px;}
+#stylized label{display:block;font-weight:bold;text-align:right;width:140px;float:left;}
+#stylized .small{color:#868686;display:block;font-size:11px;font-weight:normal;text-align:right;width:140px;}
+#stylized input{float:left;font-size:12px;padding:4px 2px;border:solid 1px #aacfe4;width:200px;margin:2px 0 20px 10px;}
+#stylized select{float:left;font-size:12px;padding:4px 2px;border:solid 1px #aacfe4;width:200px;margin:2px 0 20px 10px;}
+#stylized textarea{float:left;font-size:12px;padding:4px 2px;border:solid 1px #aacfe4;width:200px;margin:2px 0 20px 10px;}
+#stylized button{clear:both;margin-left:150px;width:125px;height:31px;background:#FFF;text-align:center;color:#868686;font-size:11px;font-weight:bold;border-radius:5px;border:solid 1px #aacfe4;}
+/* --End of my Form-- */
