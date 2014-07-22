@@ -2,12 +2,7 @@
 // On inclut la page de paramètre de connection.
 include('conf.php');
 
-// On vérifie que le user est connecté sinon on le renvoie à la page de connection
-session_start();  
-if(!isset($_SESSION['login'])) {  
-  echo '<script>document.location.href="dashboard.php"</script>';  
-  exit;  
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +66,7 @@ jQuery('[id=li-dashboard]').removeClass('active');
     			<div class="dropdown userinfo">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">Hi, ThemePixels! <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="editprofile.html"><span class="icon-edit"></span> Edit Profile</a></li>
+                        <li><a href="view-user-informations.php.html"><span class="icon-edit"></span> Edit Profile</a></li>
                         <li class="divider"></li>
                         <li><a href=""><span class="icon-wrench"></span> Account Settings</a></li>
                         <li><a href=""><span class="icon-eye-open"></span> Privacy Settings</a></li>

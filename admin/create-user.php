@@ -2,12 +2,6 @@
 // On inclut la page de paramètre de connection.
 include('conf.php');
 
-// On vérifie que le user est connecté sinon on le renvoie à la page de connection
-session_start();  
-if(!isset($_SESSION['login'])) {  
-  echo '<script>document.location.href="dashboard.php"</script>';  
-  exit;  
-}
 
 $req_admin_rights = $bdd->query('SELECT * FROM admin_rights') or die(print_r($bdd->errorInfo()));
 
@@ -177,7 +171,7 @@ jQuery(document).ready(function (){
                         </p>
 
                         <p>
-                            <label>Name *</label>
+                            <label>Full Name *</label>
                             <span class="field"><input type="text" name="name" class="input-xxlarge" required="required" /></span>
                         </p>
                         

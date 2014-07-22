@@ -76,7 +76,7 @@ jQuery(document).ready(function (){
     			<div class="dropdown userinfo">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">Hi, <?php echo $_SESSION['login']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="editprofile.html"><span class="icon-edit"></span> Edit Profile</a></li>
+                        <li><a href="view-user-informations.php.html"><span class="icon-edit"></span> Edit Profile</a></li>
                         <li class="divider"></li>
                         <li><a href=""><span class="icon-wrench"></span> Account Settings</a></li>
                         <li><a href=""><span class="icon-eye-open"></span> Privacy Settings</a></li>
