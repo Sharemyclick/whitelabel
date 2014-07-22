@@ -116,7 +116,7 @@ h4 { font-size: 16px; line-height: 26px; }
 /***** RIGHT PANEL *****/
 /***********************/
 
-.rightpanel { margin-left: 260px; position: relative; background: url(../img/gray_jean.png); }
+.rightpanel {  position: relative; background: url(../img/gray_jean.png); }
 .rightpanel:after { display: block; clear: both; content: ''; }
 
 .headerpanel { min-height: 50px; border-left: 1px solid #45729e; }

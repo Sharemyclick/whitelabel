@@ -39,10 +39,26 @@ if(!isset($_SESSION['login'])) {
                     
                     <li id="li-users" class="dropdown"><a href=""><span class="iconsweets-vcard"></span> USER PERMISSIONS</a>
                         <ul>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-users' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
                             <li><a href="view-users.php">View all users</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-user' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
                             <li><a href="create-user.php">Create user</a></li>
-                            <li><a href="update-user.php">Modify user</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-globalview-user' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="update-globalview-user.php">Modify user</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'edit-permissions' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
                             <li><a href="edit-permissions.php">Edit permissions</a></li>
+                            <?php }?>
                         </ul>
                     </li>
                 

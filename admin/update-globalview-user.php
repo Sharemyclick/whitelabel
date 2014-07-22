@@ -27,7 +27,6 @@ jQuery(document).ready(function (){
 });
 </script>
 </head>
-
 <body>
     
     <div class="mainwrapper">
@@ -63,7 +62,7 @@ jQuery(document).ready(function (){
           
         </div><!--breadcrumbwidget-->
       <div class="pagetitle">
-        	<h1>View Users</h1> <span><strong><?php echo ucfirst($_SESSION['login']); ?></strong> , please see all the details for your existing Users.</span>
+        	<h1>Update Users</h1> <span><strong><?php echo ucfirst($_SESSION['login']); ?></strong> , please see all the details for your existing Users.</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">
@@ -98,11 +97,11 @@ jQuery(document).ready(function (){
                         <tr>
                             <td class="centeralign" >
                                  <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
-                                 <a href="view-user-information.php?id=<?php echo $donnees['id']; ?>" >
+                                 <a href="update-user-information.php?id=<?php echo $donnees['id']; ?>" >
                                      <p align="center"><img  src="<?php echo 'http://localhost/white_label/admin/img/logo/'.$donnees['logo'] ?>" height="92" width="52" > </p></a>
                             </td>
                             <td class="centeralign">
-                                <a href="view-user-information.php?id=<?php echo $donnees['id']; ?>" ><?php echo $donnees['company'] ; ?> </a>
+                                <a href="update-user-information.php?id=<?php echo $donnees['id']; ?>" ><?php echo $donnees['company'] ; ?> </a>
                             </td>
                             <td class="centeralign">
                                 <a href="mailto:<?php echo $donnees['email'] ?>" > <?php echo $donnees['email']; ?> </a> 
