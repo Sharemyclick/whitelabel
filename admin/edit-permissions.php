@@ -126,28 +126,26 @@ if(isset($_POST['submitChanges'])){
                             <th class="centeralign"><i>Menus</i></th>
                             <th class="centeralign">SuperAdmin</th>
                             <th class="centeralign">Admin</th>
-                            <th class="centeralign">Heavy Advertiser</th>
-                            <th class="centeralign">Light Advertiser</th>
+                            <th class="centeralign">Advertiser</th>
                             <th class="centeralign">Affiliate</th>
-							<th class="centeralign">Intern User</th>
-							<th class="centeralign">Heavy Demo</th>
-							<th class="centeralign">Light Demo</th>
+                            <th class="centeralign">Intern User</th>
+                            <th class="centeralign">Demo</th>
                         </tr>
                     </thead>
                     <tbody>
 			
-						<tr>
-						<td colspan="9" class="leftalign"><strong>USER PERMISSIONS</strong></td>
-					   </tr>	
+                        <tr>
+                        <td colspan="9" class="leftalign"><strong>USER PERMISSIONS</strong></td>
+                        </tr>	
+                        
                         <tr>
                             <td class="centeralign">View user</td>
                             <td class="centeralign"><input type="checkbox" name="view-users|1" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-users' AND admin_rights_id = 1");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="view-users|2" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-users' AND admin_rights_id = 2");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="view-users|3" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-users' AND admin_rights_id = 3");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="view-users|4" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-users' AND admin_rights_id = 4");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
-                            <td class="centeralign"><input type="checkbox" name="view-users|7" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-users' AND admin_rights_id = 7");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
-                            <td class="centeralign"><input type="checkbox" name="view-users|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-users' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="view-users|5" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-users' AND admin_rights_id = 5");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="view-users|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-users' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                         </tr>
                         <tr>
                             <td class="centeralign">Create user</td>
@@ -155,9 +153,8 @@ if(isset($_POST['submitChanges'])){
                             <td class="centeralign"><input type="checkbox" name="create-user|2" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-user' AND admin_rights_id = 2");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="create-user|3" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-user' AND admin_rights_id = 3");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="create-user|4" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-user' AND admin_rights_id = 4");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
-                            <td class="centeralign"><input type="checkbox" name="create-user|7" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-user' AND admin_rights_id = 7");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
-                            <td class="centeralign"><input type="checkbox" name="create-user|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-user' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="create-user|5" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-user' AND admin_rights_id = 5");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="create-user|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-user' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                         </tr>
                         <tr>
                             <td class="centeralign">Update user</td>
@@ -165,9 +162,8 @@ if(isset($_POST['submitChanges'])){
                             <td class="centeralign"><input type="checkbox" name="update-globalview-user|2" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-globalview-user' AND admin_rights_id = 2");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="update-globalview-user|3" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-globalview-user' AND admin_rights_id = 3");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="update-globalview-user|4" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-globalview-user' AND admin_rights_id = 4");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
-                            <td class="centeralign"><input type="checkbox" name="update-globalview-user|7" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-globalview-user' AND admin_rights_id = 7");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
-                            <td class="centeralign"><input type="checkbox" name="update-globalview-user|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-globalview-user' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="update-globalview-user|5" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-globalview-user' AND admin_rights_id = 5");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="update-globalview-user|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-globalview-user' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                         </tr>
                         <tr>
                             <td class="centeralign">Edit user permission</td>
@@ -175,9 +171,8 @@ if(isset($_POST['submitChanges'])){
                             <td class="centeralign"><input type="checkbox" name="edit-permissions|2" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='edit-permissions' AND admin_rights_id = 2");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="edit-permissions|3" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='edit-permissions' AND admin_rights_id = 3");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="edit-permissions|4" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='edit-permissions' AND admin_rights_id = 4");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
-                            <td class="centeralign"><input type="checkbox" name="edit-permissions|7" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='edit-permissions' AND admin_rights_id = 7");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
-                            <td class="centeralign"><input type="checkbox" name="edit-permissions|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='edit-permissions' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="edit-permissions|5" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='edit-permissions' AND admin_rights_id = 5");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="edit-permissions|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='edit-permissions' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                         </tr>
 					   	
                        <tr>

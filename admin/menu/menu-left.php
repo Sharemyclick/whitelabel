@@ -37,7 +37,7 @@ if(!isset($_SESSION['login'])) {
             <ul class="nav nav-tabs nav-stacked">
                 <li id="li-dashboard" class="active"><a href="dashboard.php"><span class="icon-align-justify"></span> Dashboard</a></li>
                     
-                    <li id="li-users" class="dropdown"><a href=""><span class="iconsweets-vcard"></span> USER PERMISSIONS</a>
+                    <li id="li-users" class="dropdown"><a href=""><span class="icon-user"></span> USER PERMISSIONS</a>
                         <ul>
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-users' and admin_rights_id = ".$_SESSION['right']);
@@ -62,106 +62,245 @@ if(!isset($_SESSION['login'])) {
                         </ul>
                     </li>
                 
-                    <li id="li-quizz" class="dropdown"><a href=""><span class="icon-barcode"></span> QUIZZES</a>
-                	<ul>
-                            <li><a href="#">View all quizzes</a></li>
-                            <li><a href="#">Create quizz</a></li>
-                            <li><a href="#">Modify quizz</a></li>
-                            <li><a href="#">Quizz rentability</a></li>
+                   <li id="li-pid" class="dropdown"><a href=""><span class=" iconsweets-link2"></span> PID</a>
+                        <ul>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-pid' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="view-pid.php">View all pid</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'pid' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="pid.php">Create pid</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-pid' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="update-pid.php">Modify pid</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'renta-pid' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="renta-pid.php">Pid rentability</a></li>
+                            <?php }?>
                         </ul>
-                    </li>
+                    </li> 
+                    
+                    
+                 <li id="li-quote" class="dropdown"><a href=""><span class="icon-file"></span> QUOTE</a>
+                        <ul>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-quote' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="view-quote.php">View quote</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-quote' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="create-quote.php">Create quote</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-quote' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="update-quote.php">Modify quote</a></li>
+                            <?php }?>
+                        </ul>
+                    </li>   
+                    
+                    
+                    <li id="li-form" class="dropdown"><a href=""><span class="icon-folder-close"></span> FORM</a>
+                        <ul>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-form' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="view-form.php">View quote</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-form' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="create-form.php">Create quote/a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-form' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="update-form.php">Modify quote</a></li>
+                            <?php }?>
+                        </ul>
+                    </li>  
+                    
+                    <li id="li-question" class="dropdown"><a href=""><span class=" icon-question-sign"></span> QUESTIONS</a>
+                        <ul>
+                            
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-question' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="view-question.php">Create pid</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-question' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="create-question.php">View all pid</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-question' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="update-question.php">Modify pid</a></li>
+                            <?php }?>
+                        </ul>
+                    </li>  
+                    
+                    <li id="li-answer" class="dropdown"><a href=""><span class=" iconsweets-arrowright"></span> ANSWERS</a>
+                        <ul>
+                           
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-answer' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="view-answer.php">View answers</a></li>
+                            <?php }?>
+                             <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-answer' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="create-answer.php">Create answer</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-answer' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="update-answer.php">Modify answer</a></li>
+                            <?php }?>
+                        </ul>
+                    </li>  
 
-		<li id="li-rent" class="dropdown"><a href=""><span class="iconsweets-money"></span> GLOBAL RENTABILITY</a>
-                    <ul>
-                    	<li><a href="admin-rentability.php">View rentability</a></li>
-                    </ul>
-                </li>
-
-                <li id="li-pid" class="dropdown"><a href=""><span class="iconsweets-tag"></span> PID</a>
-                    <ul>
-			<li><a href="view-pid.php">View all pid</a></li>
-                        <li><a href="pid.php">Create pid</a></li>
-			<li><a href="update-pid.php">Modify pid</a></li>
-			<li><a href="renta-pid.php">Pid rentability</a></li>
-                    </ul>
-                </li>
-			
-		<li id="li-coreg" class="dropdown"><a href=""><span class="iconsweets-cart"></span> COREG</a>
-                    <ul>
-                    	<li id="li-view-coreg"><a href="view-coreg.php">View all coreg</a></li>
-                        <li><a href="coreg.php">Create coreg</a></li>
-			<li><a href="update-coreg.php">Modify coreg</a></li>
-			<li><a href="renta-coreg.php">Coreg rentability</a></li>
-                    </ul>
-                </li>
-
-                <li id="li-questions" class="dropdown"><a href=""><span class="iconsweets-alarm2"></span> QUESTIONS</a>
-                    <ul>
-                        <li><a href="view-questions.php">View all questions</a></li>
-                        <li><a href="questions.php">Create question</a></li>
-                        <li><a href="update-questions.php">Modify question</a></li>
-                    </ul>
-                </li>
-                
-                <li id="li-answers" class="dropdown"><a href=""><span class="iconsweets-lightbulb"></span> ANSWERS</a>
-                    <ul>
-                        <li><a href="view-answers.php">View all answers</a></li>
-                        <li><a href="answers.php">Create answer</a></li>
-                        <li><a href="update-answers.php">Modify answer</a></li>
-                    </ul>
-                </li>
-
-		<li id="li-sponsor" class="dropdown"><a href=""><span class="iconsweets-cart2"></span> SPONSOR</a>
-                    <ul>
-                    	<li id="li-view-sponsor"><a href="view-sponsor.php">View all sponsor</a></li>
-                        <li><a href="sponsor.php">Create sponsor</a></li>
-			<li><a href="update-sponsor.php">Modify sponsor</a></li>
-			<li><a href="renta-sponsor.php">Sponsor rentability</a></li>
-                    </ul>
-                </li>
-				
-		<li id="li-prizes" class="dropdown"><a href=""><span class="iconsweets-cart3"></span> 2ND PRIZES</a>
-                    <ul>
-                    	<li><a href="view-prizes.php">View all prizes</a></li>
-                        <li><a href="prizes.php">Create prizes</a></li>
-			<li><a href="update-prizes.php">Modify prizes</a></li>
-                    </ul>
-                </li>
-
-		<li id="li-ws" class="dropdown"><a href=""><span class="iconsweets-globe"></span> WEBSERVICE</a>
-                    <ul>
-                    	<li><a href="view-webservice.php">View all webservice</a></li>
-                        <li><a href="webservice.php">Create webservice</a></li>
-                        <li><a href="update-webservice.php">Modify webservice</a></li>
-			<li><a href="webservice_params.php">Manage webservice parameters</a></li>
-			<li><a href="webservice_fields.php">Manage webservice fields</a></li>
-			<li><a href="test_ws.php">Test webservices coregs</a></li>
-			<li><a href="test_ws2.php">Test webservices sponsors</a></li>
-			<li><a href="easyvoyage.php">Easyvoyage</a></li>
-			<li><a href="travelbird.php">Travelbird</a></li>
-                    </ul>
-                </li>
+             <li id="li-theme" class="dropdown"><a href=""><span class=" icon-th-large"></span> THEMES</a>
+                        <ul>
+                           
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-theme' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="view-theme.php">View themes</a></li>
+                            <?php }?>
+                             <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-theme' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="create-theme.php">Create theme</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-theme' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="update-theme.php">Modify theme</a></li>
+                            <?php }?>
+                        </ul>
+                    </li>  
+                    
+                    <li id="li-categorie" class="dropdown"><a href=""><span class="icon-tasks"></span> CATEGORIES</a>
+                        <ul>
+                           
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-categorie' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="view-categorie.php">View categories</a></li>
+                            <?php }?>
+                             <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-categorie' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="create-categorie.php">Create categorie</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-categorie' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="update-categorie.php">Modify categorie</a></li>
+                            <?php }?>
+                        </ul>
+                    </li>  
+                    
+                    <li id="li-webservice" class="dropdown"><a href=""><span class="icon-wrench"></span> WEBSERVICE</a>
+                        <ul>
+                           
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-webservice' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="view-webservice.php">View all webservice</a></li>
+                             <?php }?>
+                             <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-webservice' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="create-webservice.php">Create webservice</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-webservice' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                           <li><a href="update-webservice.php">Modify webservice</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'webservice_params' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="webservice_params.php">Manage webservice parameters</a></li>
+                            <?php }?>
+                             <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'webservice_fields' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="webservice_fields.php">Manage webservice fields</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'test_ws' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="test_ws.php">Test webservices coregs</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'test_ws2' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="test_ws2.php">Test webservices sponsors</a></li>
+                            <?php }?>
+                             <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'easyvoyage' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="easyvoyage.php">Easyvoyage</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'travelbird' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                           <li><a href="travelbird.php">Travelbird</a></li>                        
+                            <?php }?>
+                        </ul>
+                    </li> 
+                    
+                    
+                    <li id="li-leads" class="dropdown"><a href=""><span class="iconsweets-chart8"></span> LEADS</a>
+                        <ul>
+                           
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-user' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="view-user.php">View all registers</a></li>
+                            <?php }?>
+                             <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'blacklist' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="blacklist.php">Manage blacklist</a></li>
+                            <?php }?>
+                        </ul>
+                    </li> 
+               
 		
-                <li id="li-registers" class="dropdown"><a href=""><span class="iconsweets-users"></span> LEADS</a>
+		<li id="li-tags" class="dropdown"><a href=""><span class="icon-tag"></span> TAGS</a>
                     <ul>
-                    	<li><a href="view-user.php">View all registers</a></li>
-			<li><a href="blacklist.php">Manage blacklist</a></li>
-                    </ul>
-                </li>
-
-		<li id="li-email" class="dropdown"><a href=""><span class="iconsweets-speech4"></span> EMAIL INVITE</a>
-                    <ul>
-                    	<li><a href="view-emails.php">View all emails</a></li>
-                        <li><a href="create-email.php">Create email</a></li>
-			<li><a href="update-email.php">Modify email</a></li>
-                    </ul>
-                </li>
-
-		<li id="li-email" class="dropdown"><a href=""><span class="iconsweets-settings"></span> GOOGLE ANALYTICS</a>
-                    <ul>
-                    	<li><a href="view-tags.php">View all google tags</a></li>
-                        <li><a href="tags.php">Create google tag</a></li>
-			<li><a href="update-tags.php">Modify google tag</a></li>
+                        <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-tags' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="view-tags.php">View all google tags</a></li>                            
+                            <?php }?>
+                             <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-tags' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="create-tags.php">Create google tag</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-tags' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="update-tags.php">Modify google tag</a></li>
+                            <?php }?>
+                        
+                    	
                     </ul>
                 </li>
             </ul>
