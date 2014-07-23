@@ -192,23 +192,23 @@ if(!isset($_SESSION['login'])) {
                         </ul>
                     </li>  
                     
-                    <li id="li-categorie" class="dropdown"><a href=""><span class="icon-tasks"></span> CATEGORIES</a>
+                    <li id="li-category" class="dropdown"><a href=""><span class="icon-tasks"></span> CATEGORIES</a>
                         <ul>
                            
                             <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-categorie' and admin_rights_id = ".$_SESSION['right']);
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-categories' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="view-categorie.php">View categories</a></li>
+                            <li><a href="view-categories.php">View categories</a></li>
                             <?php }?>
                              <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-categorie' and admin_rights_id = ".$_SESSION['right']);
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-category' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="create-categorie.php">Create categorie</a></li>
+                            <li><a href="create-category.php">Create category</a></li>
                             <?php }?>
                             <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-categorie' and admin_rights_id = ".$_SESSION['right']);
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-category' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="update-categorie.php">Modify categorie</a></li>
+                            <li><a href="update-category.php">Modify category</a></li>
                             <?php }?>
                         </ul>
                     </li>  
@@ -251,16 +251,6 @@ if(!isset($_SESSION['login'])) {
                             if($req_menu->rowCount() > 0){?>
                             <li><a href="test_ws2.php">Test webservices sponsors</a></li>
                             <?php }?>
-                             <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'easyvoyage' and admin_rights_id = ".$_SESSION['right']);
-                            if($req_menu->rowCount() > 0){?>
-                            <li><a href="easyvoyage.php">Easyvoyage</a></li>
-                            <?php }?>
-                            <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'travelbird' and admin_rights_id = ".$_SESSION['right']);
-                            if($req_menu->rowCount() > 0){?>
-                           <li><a href="travelbird.php">Travelbird</a></li>                        
-                            <?php }?>
                         </ul>
                     </li> 
                     
@@ -269,9 +259,9 @@ if(!isset($_SESSION['login'])) {
                         <ul>
                            
                             <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-user' and admin_rights_id = ".$_SESSION['right']);
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-leads' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="view-user.php">View all registers</a></li>
+                            <li><a href="view-leads.php">View all registers</a></li> <!-- renvoie sur view-user.php normalement -->
                             <?php }?>
                              <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'blacklist' and admin_rights_id = ".$_SESSION['right']);
