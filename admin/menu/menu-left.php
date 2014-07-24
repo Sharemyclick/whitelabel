@@ -124,12 +124,12 @@
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-question-answer' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="view-question-answer.php">Create question & answer</a></li>
+                            <li><a href="view-question-answer.php">View question & answer</a></li>
                             <?php }?>
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-question-answer' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="create-question-answer.php">View question & answer</a></li>
+                            <li><a href="create-question-answer.php">Create question & answer</a></li>
                             <?php }?>
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-question-answer' and admin_rights_id = ".$_SESSION['right']);

@@ -1,7 +1,7 @@
 <?php
 // On inclut la page de paramètre de connection.
 include('conf.php');
-
+?>
 
 
 <!DOCTYPE html>
