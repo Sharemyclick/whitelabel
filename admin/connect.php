@@ -1,4 +1,5 @@
-<?php require ('conf.php');
+<?php 
+require ('conf.php');
 	if(isset($_POST) && !empty($_POST['login']) && !empty($_POST['password']))
 		{
 	extract ($_POST);
@@ -17,10 +18,12 @@
 				if($data['password'] == $_POST['password'])
 				{
 				/// Là le pass est correct, on peut faire le session_start();
-				session_start();
+				//session_start();
+                                unset($_SESSION['first_log']);
 				$_SESSION['login'] = $login;
 				$_SESSION['right'] = $data['admin_rights_id'];
-				echo '<script> document.location.href="dashboard.php" </script>';
+				//echo '<script> document.location.href="dashboard.php" </script>';
+                                 header("location:dashboard.php");
 				}
 					// Si le login ne fonctionne pas on le renvoie à la page de login
 					else{
@@ -32,4 +35,5 @@
 	$req->closeCursor();
 			}
 		}
+                
 ?>

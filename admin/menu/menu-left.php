@@ -1,14 +1,3 @@
-<?php
-// On inclut la page de paramètre de connection.
-include('conf.php');
-
-// On vérifie que le user est connecté sinon on le renvoie à la page de connection
-session_start();  
-if(!isset($_SESSION['login'])) {  
-  echo '<script>document.location.href="admin.php"</script>';  
-  exit;  
-}
-?>
     <!-- START OF LEFT PANEL -->
     <div class="leftpanel">
     	
@@ -129,49 +118,28 @@ if(!isset($_SESSION['login'])) {
                         </ul>
                     </li>  
                     
-                    <li id="li-question" class="dropdown"><a href=""><span class=" icon-question-sign"></span> QUESTIONS</a>
+                    <li id="li-question" class="dropdown"><a href=""><span class=" icon-question-sign"></span> QUESTIONS & ANSWER</a>
                         <ul>
                             
                             <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-question' and admin_rights_id = ".$_SESSION['right']);
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-question-answer' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="view-question.php">Create pid</a></li>
+                            <li><a href="view-question-answer.php">Create question & answer</a></li>
                             <?php }?>
                             <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-question' and admin_rights_id = ".$_SESSION['right']);
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-question-answer' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="create-question.php">View all pid</a></li>
+                            <li><a href="create-question-answer.php">View question & answer</a></li>
                             <?php }?>
                             <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-question' and admin_rights_id = ".$_SESSION['right']);
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-question-answer' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="update-question.php">Modify pid</a></li>
+                            <li><a href="update-question-answer.php">Modify question & answer</a></li>
                             <?php }?>
                         </ul>
                     </li>  
                     
-                    <li id="li-answer" class="dropdown"><a href=""><span class=" iconsweets-arrowright"></span> ANSWERS</a>
-                        <ul>
-                           
-                            <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-answer' and admin_rights_id = ".$_SESSION['right']);
-                            if($req_menu->rowCount() > 0){?>
-                            <li><a href="view-answer.php">View answers</a></li>
-                            <?php }?>
-                             <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-answer' and admin_rights_id = ".$_SESSION['right']);
-                            if($req_menu->rowCount() > 0){?>
-                            <li><a href="create-answer.php">Create answer</a></li>
-                            <?php }?>
-                            <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-answer' and admin_rights_id = ".$_SESSION['right']);
-                            if($req_menu->rowCount() > 0){?>
-                            <li><a href="update-answer.php">Modify answer</a></li>
-                            <?php }?>
-                        </ul>
-                    </li>  
-
-             <li id="li-theme" class="dropdown"><a href=""><span class=" icon-th-large"></span> THEMES</a>
+                    <li id="li-theme" class="dropdown"><a href=""><span class=" icon-th-large"></span> THEMES</a>
                         <ul>
                            
                             <?php
