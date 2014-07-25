@@ -103,17 +103,17 @@
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-form' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="view-form.php">View quote</a></li>
+                            <li><a href="view-form.php">View form</a></li>
                             <?php }?>
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-form' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="create-form.php">Create quote/a></li>
+                            <li><a href="create-form.php">Create form</a></li>
                             <?php }?>
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-form' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="update-form.php">Modify quote</a></li>
+                            <li><a href="update-form.php">Modify form</a></li>
                             <?php }?>
                         </ul>
                     </li>  
@@ -134,7 +134,7 @@
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-question-answer' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="update-question-answer.php">Modify question & answer</a></li>
+                            <li><a href="update-question-answer-globalview.php">Modify question & answer</a></li>
                             <?php }?>
                         </ul>
                     </li>  
