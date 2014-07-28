@@ -2,7 +2,6 @@
 // On inclut la page de paramètre de connection.
 include('conf.php');
 
-
 ?>
 <!DOCTYPE html>
 <head>
@@ -74,7 +73,7 @@ include('conf.php');
     			<div class="dropdown userinfo">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">Hi, <?php echo $_SESSION['login']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="view-user-informations.php.html"><span class="icon-edit"></span> Edit Profile</a></li>
+                        <li><a href="editprofile.html"><span class="icon-edit"></span> Edit Profile</a></li>
                         <li class="divider"></li>
                         <li><a href=""><span class="icon-wrench"></span> Account Settings</a></li>
                         <li><a href=""><span class="icon-eye-open"></span> Privacy Settings</a></li>
@@ -108,7 +107,7 @@ include('conf.php');
         <div class="maincontent">
         	<div class="contentinner">
                 
-			<h4 class="widgettitle">List of all pids</h4>
+			<h4 class="widgettitle">List of all pids</h4><small>Please make sure you replace the <strong><span style="color:red;">"xxxxx"</span></strong> by the name of the quizz. You have the choice between <span style="color:green;">"iphone5c"</span>, <span style="color:green;">"minibarsmeg"</span> or <span style="color:green;">"nespressocitiz"</span></small>
             	<table class="table table-bordered">
                     <colgroup>
                         <col class="con0" />
@@ -125,9 +124,9 @@ include('conf.php');
                             <th class="centeralign">Pid Name</th>
                             <th class="centeralign">Pid price</th>
                             <th class="centeralign">Pid country</th>
-							<th class="centeralign">Pid pixel</th>
-							<th class="centeralign">Tracking Link</th>
-                            <th class="centeralign">Delete</th>
+                            <th class="centeralign">Pid pixel</th>
+                            <th class="centeralign">Tracking Link</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -139,13 +138,12 @@ include('conf.php');
 						{
                         echo '<tr>';
                         	echo '<td class="centeralign"><input type="checkbox" /></td>';
-                            echo '<td class="centeralign">'.$donnees['pid_name'].'</td>';
-                            echo '<td class="centeralign">'.$donnees['pid_price'].'</td>';
-                            echo '<td class="centeralign">'.$donnees['pid_country'].'</td>';
-							echo '<td class="centeralign"><textarea name="pid_pixel" id="pid_pixel">'.$donnees['pid_pixel'].'</textarea></td>';
-							echo '<td class="centeralign"><a href="http://concours.sharemydeal.net/?pid='.$donnees['id'].'&firstname=&lastname=&gender=&email=&city=&postal_code=&address=&telephone=&dob=&country=" target="_blank">http://concours.sharemydeal.net/?pid='.$donnees['id'].'&firstname=&lastname=&gender=&email=&city=&postal_code=&address=&telephone=&dob=&country=</td>';
-                            echo '<td class="centeralign"><a href="" id="delete'.$donnees['id'].'" class="deleterowcustomized"><span class="icon-trash"></span></a></td>';
-                        echo '</tr>';
+                            echo '<td class="centeralign">'.$donnees['name'].'</td>';
+                            echo '<td class="centeralign">'.$donnees['price'].'</td>';
+                            echo '<td class="centeralign">'.$donnees['country'].'</td>';
+                            echo '<td class="centeralign"><textarea name="pid_pixel" id="pid_pixel">'.$donnees['pixel'].'</textarea></td>';
+                            echo '<td class="centeralign"><a href="http://xxxxxxxxxx.actu-du-jour.com/?pid='.$donnees['id'].'&firstname=&lastname=&gender=&email=&city=&postal_code=&address=&telephone=&dob=&country=" target="_blank">http://concours.sharemydeal.net/?pid='.$donnees['id'].'&firstname=&lastname=&gender=&email=&city=&postal_code=&address=&telephone=&dob=&country=</td>';
+                            echo '</tr>';
 						}
 					?>
                     </tbody>
@@ -162,8 +160,8 @@ include('conf.php');
     <div class="clearfix"></div>
     
     <div class="footer">
-    	<div class="footerleft">Katniss Premium Admin Template v1.0</div>
-    	<div class="footerright">&copy; ThemePixels - <a href="http://twitter.com/themepixels">Follow me on Twitter</a> - <a href="http://dribbble.com/themepixels">Follow me on Dribbble</a></div>
+    	<div class="footerleft">Sharemyclick Plateform v1.1</div>
+    	<div class="footerright">&copy; ThemePixels - <a href="http://twitter.com/sharemyclick">Follow us on Twitter</a> - <a href="https://www.facebook.com/sharemyclick">Follow us on Facebook</a></div>
     </div><!--footer-->
     
 </div><!--mainwrapper-->

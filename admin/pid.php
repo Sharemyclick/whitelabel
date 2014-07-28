@@ -3,6 +3,7 @@
 include('conf.php');
 
 
+
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +23,7 @@ include('conf.php');
 <script type="text/javascript" src="js/jquery.smartWizard.min.js"></script>
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/colorpicker.js"></script>
 <script type="text/javascript">
 jQuery(document).ready(function (){
 jQuery('[id=li-dashboard]').removeClass('active');
@@ -66,7 +68,7 @@ jQuery('[id=li-dashboard]').removeClass('active');
     			<div class="dropdown userinfo">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">Hi, ThemePixels! <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="view-user-informations.php.html"><span class="icon-edit"></span> Edit Profile</a></li>
+                        <li><a href="editprofile.html"><span class="icon-edit"></span> Edit Profile</a></li>
                         <li class="divider"></li>
                         <li><a href=""><span class="icon-wrench"></span> Account Settings</a></li>
                         <li><a href=""><span class="icon-eye-open"></span> Privacy Settings</a></li>
@@ -123,13 +125,25 @@ jQuery('[id=li-dashboard]').removeClass('active');
                                     <span class="label">Enter Pid country</span>
                                 </a>
                             </li>
+							<li>
+                            	<a href="#wiz1step2_4">
+                                	<span class="h2">STEP 4</span>
+                                    <span class="label">Enter Pid color (for graphs)</span>
+                                </a>
+                            </li>
+                            <li>
+                            	<a href="#wiz1step2_5">
+                                	<span class="h2">STEP 5</span>
+                                    <span class="label">Enter the Pixel </span>
+                                </a>
+                            </li>
                         </ul>
                         	
                         <div id="wiz1step2_1" class="formwiz">
                         	<h4>Step 1: Enter Pid name</h4>
                                 <p>
                                     <label>Pid name</label>
-                                    <span class="field"><input type="text" name="pid_name" class="input-xxlarge" required="required" /></span>
+                                    <span class="field"><input type="text" name="name" class="input-xxlarge" required="required" /></span>
                                 </p>
                         </div><!--#wiz1step2_1-->
                         
@@ -137,7 +151,7 @@ jQuery('[id=li-dashboard]').removeClass('active');
                         	<h4>Step 2: Enter Pid price</h4> 
                                 <p>
                                     <label>Pid price</label>
-                                    <span class="field"><input type="text" name="pid_price" class="input-xxlarge" required="required" /></span>
+                                    <span class="field"><input type="text" name="price" class="input-xxlarge" required="required" /></span>
                                 </p>
                         </div><!--#wiz1step2_2-->
                         
@@ -145,9 +159,36 @@ jQuery('[id=li-dashboard]').removeClass('active');
                         	<h4>Step 3: Enter Pid country</h4>
 								<p>
                                     <label>Pid country</label>
-                                    <span class="field"><input type="text" name="pid_country" class="input-xxlarge" required="required" /></span>
+                                    <span class="field"><input type="text" name="country" class="input-xxlarge" required="required" /></span>
                                 </p>
                         </div><!--#wiz1step2_3-->
+						
+						<div id="wiz1step2_4">
+                        	<h4>Step 4: Enter Pid color (for graphs)</h4>
+								<p>
+                                    <label>Pid color</label>
+                                    <span class="field">
+									<input type="text" name="colorpicker" class="input-mini" id="colorpicker" />
+									<span id="colorSelector" class="colorselector">
+									<span></span>
+									</span>
+									</span>
+									<br /><span class="field">Already assigned :<br />
+									<?php $req_pids = $bdd->query("SELECT name, color_code FROM pid");
+									while($res_pids = $req_pids->fetch()){?>
+									<?php echo $res_pids['name']; ?> : <span style="color:<?php echo $res_pids['color_code']; ?>;background-color:<?php echo $res_pids['color_code']; ?>;">text</span><br />
+									<?php }?>
+									</span>
+                                </p>
+                        </div><!--#wiz1step2_4-->
+                        
+                         <div id="wiz1step2_5">
+                        	<h4>Step 5: Enter the Pixel </h4>
+                                <p>
+                                    <label>Pid country</label>
+                                    <span class="field"><textarea name="pixel" rows="4" cols="8"></textarea>   </span>
+                                </p>
+                        </div>
                         
                     </div><!--#wizard-->
                     </form>               
@@ -182,6 +223,21 @@ jQuery('[id=li-dashboard]').removeClass('active');
 		jQuery(".inline").colorbox({inline:true, width: '60%', height: '500px'});
 		
 		jQuery('select, input:checkbox').uniform();
+		
+		jQuery('#colorSelector').ColorPicker({
+    onShow: function (colpkr) {
+    jQuery(colpkr).fadeIn(500);
+    return false;
+    },
+    onHide: function (colpkr) {
+    jQuery(colpkr).fadeOut(500);
+    return false;
+    },
+    onChange: function (hsb, hex, rgb) {
+    jQuery('#colorSelector span').css('backgroundColor','#'+hex);
+    jQuery('#colorpicker').val('#'+hex);
+    }
+    });
 	});
 </script>
 </body>
