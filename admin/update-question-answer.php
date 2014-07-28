@@ -77,10 +77,54 @@ $reqAnswer = $bdd->query('SELECT * FROM answers LEFT JOIN answers_questions ON a
                 
                 <?php
                      if(isset($_POST['submit_update'])){
-        $bdd->exec('UPDATE admin SET login="'.$_POST['login'].'" , password="'.$_POST['password'].'" , email="'.$_POST['email'].' ", name = "'.$_POST['name'].'", company = "'.$_POST['company'].'", address = "'.$_POST['address'].'", postal_code ="'.$_POST['postal_code'].'", city = "'.$_POST['city'].'", telephone="'.$_POST['telephone'].'", iban="'.$_POST['iban'].'", swift_bic="'.$_POST['swift_bic'].'", vat = "'.$_POST['vat'].'", admin_rights_id="'.$_POST['admin_rights_id'].'" WHERE id='.$id);
+        $reqDeleteAnswer = $bdd->query('SELECT answers.id FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id='.$id);
+             
+        //DELETE FROM JOINED TABLE
+        $bdd->exec('DELETE FROM answers_questions WHERE answers_questions.questions_id='.$id);
+        //echo 'delete from answers_questions <br>';
+        
+//---------------------------------------------------------------------------------//
+        //DELETE FROM ANSWER 
+        while ($answer = $reqDeleteAnswer->fetch())
+            { 
+            $bdd->exec('DELETE FROM answers WHERE id='.$answer['id']);      
+            }
+        //echo 'delete from answers <br>';
+        
+//-----------------------------------------------------------------------------------// 
+        //UPDATE QUESTIONS
+        $bdd->exec('UPDATE questions SET text="'.$_POST['question'].'" , type="'.$_POST['type'].'" WHERE id='.$id);
+        //echo 'update question </br>';
+        
+//---------------------------------------------------------------------------------------//
+        //INSERT NEW DATA INTO ANSWERS
+       // echo '<pre>'.var_dump($_POST).'</pre>';
+        for ($ans = 0; $ans<$_POST['nb_answer_insert']; $ans++)
+        {
+            $reqInsertAnswer = $bdd->prepare('INSERT INTO answers(text, ref) VALUES (:text, :ref)');
+// On execute la requête en lui transmettant la liste des paramètres
+	$reqInsertAnswer->execute(array(
+		'text' => $_POST['answer'.$ans],
+                'ref' => $_POST['ref'.$ans]
+                
+		)) or die(print_r($reqInsertAnswer->errorInfo()));
+        $idAnswer= $bdd->lastInsertId();
+        
+        //echo 'answer num'.$ans.' inseree dans answer </br>';
+        
+        $reqInsertAnswerQuestion = $bdd->prepare('INSERT INTO answers_questions (answers_id, questions_id) VALUES (:answers_id, :questions_id)');
+// On execute la requête en lui transmettant la liste des paramètres
+	$reqInsertAnswerQuestion->execute(array(
+		'answers_id' => $idAnswer,
+                'questions_id' => $id
+                
+		)) or die(print_r($req->errorInfo()));
+       // echo 'insert into join table answer_question /br>';
 
-                         
-                         ?>   <h4 class='confirmation' style="text-align: center" ">Informations have been updated. </h4> </br> 
+        }
+     
+               ?>
+                <h4 class='confirmation' style="text-align: center" ">Informations have been updated. </h4> </br> 
                 
                          <span class="field" >
                              <div class="widgetcontent">
@@ -114,6 +158,19 @@ $reqAnswer = $bdd->query('SELECT * FROM answers LEFT JOIN answers_questions ON a
                             <label>Question</label>
                             <span class="field"><input type="text" value="<?php echo $question['text'];?>" name="question" class="input-xxlarge" /></span>
                         </p>
+                               
+                        <p>
+                            <label>Type of question</label>
+                            <span class="field">
+                                        <select name="type" id="type" class="status">
+                                            <option value="Input text"  <?php if ($question['type']=="Input text") {echo ' selected ';} ?>>Input text</option>
+                                            <option value="Select" <?php if ($question['type']=="Select") {echo ' selected ';} ?>>Select</option>
+                                            <option value="Radio" <?php if ($question['type']=="Radio") {echo ' selected ';} ?>>Radio</option>
+                                            <option value="Checkbox" <?php if ($question['type']=="Checkbox") {echo ' selected ';} ?>>Checkbox</option>
+                                            <option value="Textarea" <?php if ($question['type']=="Textarea") {echo ' selected ';} ?>>Textarea</option>
+                                        </select>
+                                    </span>
+                        </p>
 
                         <p>
                             <label>Number of answer to add *</label>
@@ -129,28 +186,32 @@ $reqAnswer = $bdd->query('SELECT * FROM answers LEFT JOIN answers_questions ON a
                             
                             <span class="field">
                                 <?php
-                                $i=1;
+                                $i=0;
                                 while ($answer = $reqAnswer->fetch())
                                     {   
                                          ?>  <input type="text" value="<?php echo $answer['text'];?>" name="answer<?php echo $i; ?>" class="input-xxlarge" /> 
-                                         <input type="text" value="" name="ref<?php echo $b; ?>" placeholder="Reference" /> </br> </br>  
-  <?php
+                                         <input type="text" value="<?php echo $answer['ref'];?>" name="ref<?php echo $i; ?>" placeholder="Reference" /> </br> </br>  
+  <?php $i=$i+1;
                                     }
+                                    $nb=$i;
 
                                 if(isset($_POST['generate']))
                                 {
                                     for ($a=1; $a<=$_POST['nb_answer'];$a++)
                                     {
-                                           $b=$a+$i;
+                                           $b=$a+($i-1);
                                              ?> 
                                          
                                          <input type="text" value="" name="answer<?php echo $b; ?>" class="input-xxlarge" /> 
-                                        <input type="text" value="" name="ref<?php echo $b; ?>" placeholder="Reference"  /> </br> </br>  <?php
+                                        <input type="text" value="<?php echo $answer['ref'];?>" name="ref<?php echo $b; ?>" placeholder="Reference"  /> </br> </br>  <?php
 
-                                         
                                     }
                                     unset($_POST['generate']);
+                                    $nb=$b+1;
                                 }
+                                ?>
+                                        <input type="hidden" name="nb_answer_insert" value="<?php echo $nb; ?>">
+                                        <?php
                                                 ?>
                             </span>
                             

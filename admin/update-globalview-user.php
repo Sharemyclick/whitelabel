@@ -116,7 +116,7 @@ jQuery(document).ready(function (){
 				// dynamic table
 				jQuery('#dbase').dataTable({
 				   "sPaginationType": "full_numbers",
-				   "aaSortingFixed": [[4,'asc']],
+				   "aaSortingFixed": [[0,'asc']],
 				   "fnDrawCallback": function(oSettings) {
 					  jQuery.uniform.update();
 				   }

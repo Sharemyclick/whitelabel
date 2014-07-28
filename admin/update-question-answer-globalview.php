@@ -10,6 +10,24 @@ include('conf.php');
     //$bdd->exec('DELETE FROM questions WHERE id='.$question['id']); 
     //}
     
+if(isset($_POST) && !empty($_POST)){
+    foreach($_POST as $indPost => $valPost){
+        if(strpos($indPost,'delete') !== false){
+            $reqDeleteAnswer = $bdd->query('SELECT answers.id FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id='.$_POST['id']);
+            
+            $bdd->exec('DELETE FROM answers_questions WHERE questions_id='.$_POST['id']);
+            
+            while ($answer = $reqDeleteAnswer->fetch())
+                                    {
+                                         $bdd->exec('DELETE FROM answers WHERE id='.$answer['id']);      
+                                    }
+
+            $bdd->exec('DELETE FROM questions WHERE id='.$_POST['id']); 
+                    
+
+        }
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -33,6 +51,12 @@ jQuery(document).ready(function (){
 	jQuery('[id=li-dashboard]').removeClass('active');
 	//jQuery('[id=li-view-coreg]').addClass('active');
 	jQuery('[id=li-users]').addClass('active');
+        
+        jQuery('[id^=delete]').click(function() {
+            var id = jQuery(this).attr('id').substring(6);
+            jQuery( "#form-delete-" + id ).submit();
+        });
+        
 });
 </script>
 </head>
@@ -104,7 +128,7 @@ jQuery(document).ready(function (){
 					while ($question = $reqQuestion->fetch())
 						{?>
                         <tr>
-                        <form class="stdform" method="post" action="update-question-answer.php?id=<?php echo $question['id'];?>">
+                        
 
                             <td class="centeralign" >
                                   <p align="center"> <?php echo $question['text'] ?>
@@ -115,54 +139,59 @@ jQuery(document).ready(function (){
                                 {
                                     //echo 'Input text'; ?> 
                                 <input type="text" >
-                                <?php
+                                  <?php 
+                               
                                 }
                                 if($question['type'] === 'Select')
                                 {
                                     //echo 'Select';
                                     ?><select name="answers" id="answers" class="status"> <?php
-                                   $reqAnswer = $bdd->query('SELECT answers.text AS answer FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id='.$question['id']) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
+                                   $reqAnswer = $bdd->query('SELECT answers.text AS answer, answers.ref AS ref FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id='.$question['id']) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
                                     while ($answer = $reqAnswer->fetch())
                                     {
-                                        echo '<option value="'.$answer['answer'].'">'.$answer['answer'].'</option>';
-                                              
-                                    }?> </select> <?php
+                                        echo '<option value="'.$answer['answer'].'">'.$answer['answer'].'<i> --- Reference : '.$answer['ref'].'</i></option>';
+                                    }
+                                    ?> </select> <?php
                                     
                                 }
                                  if($question['type'] === 'Radio')
                                 {
                                     //echo 'Radio';
-                                     $reqAnswer = $bdd->query('SELECT answers.text AS answer FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id='.$question['id']) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
+                                     $reqAnswer = $bdd->query('SELECT answers.text AS answer, answers.ref AS ref  FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id='.$question['id']) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
                                     while ($answer = $reqAnswer->fetch())
                                     {
-                                        echo '<INPUT type= "radio" name="rqdio" value="'.$answer['answer'].'">'.$answer['answer'].'</br>';
-                                                                                     
+                                        echo '<INPUT type= "radio" name="rqdio" value="'.$answer['answer'].'">'.$answer['answer'].'<i> --- Reference : '.$answer['ref'].'</i></br>';
                                     }
                                 }
                                  if($question['type'] === 'Checkbox')
                                 {
                                    // echo 'Checkbox';
-                                     $reqAnswer = $bdd->query('SELECT answers.text AS answer FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id='.$question['id']) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
+                                     $reqAnswer = $bdd->query('SELECT answers.text AS answer, answers.ref AS ref  FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id='.$question['id']) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
                                     while ($answer = $reqAnswer->fetch())
                                     {
-                                        echo '<INPUT type= "checkbox" name="checkbox" value="'.$answer['answer'].'">'.$answer['answer'].'</br>';
-                                                                                     
+                                        echo '<INPUT type= "checkbox" name="checkbox" value="'.$answer['answer'].'">'.$answer['answer'].'<i> --- Reference : '.$answer['ref'].'</i></br>';
+                                              
                                     }
                                 }
                                  if($question['type'] === 'Textarea')
                                 {
-                                    //echo 'Textarea';
-                                    echo' <textarea rows="1" cols="4"></textarea>
-';
-                                }?>
+                                     
+                                       echo ' <textarea rows="1" cols="4"></textarea>        ';
+                                }?> 
                             </td>
-                            <td class="centeralign"> <a href="update-question-answer.php?id=<?php echo $question['id'] ?>" ><input type="button" class="btn btn-success" name="update" value="Update"> </a>
-                            </td>
-                            <td class="centeralign" >
-                              <a href="" id="delete'.question['id'].'" class="deleterowcustomized"><span class="icon-trash"></span></a>
+                            <td class="centeralign"> <a href="update-question-answer.php?id=<?php echo $question['id']; ?>" > <input type="button" class="btn btn-success" name="update" value="Update"> </a>
                             </td>
                             
-                        </form>
+                            <td class="centeralign" >
+                                <form  id="form-delete-<?php echo $question['id']; ?>" name="form-delete-<?php echo $question['id']; ?>" method="post" action="">
+                                  <a href="#"  class="deleterowcustomized"><span id="delete<?php echo $question['id']; ?>" class="icon-trash"></span></a>
+                                  <input type="hidden" name="hidden_delete<?php echo $question['id']; ?>" value="" >
+                                  <input type="hidden" name="id" value="<?php echo $question['id']; ?>" >
+
+                                </form>
+                            </td>
+                            
+                       
                         </tr>				
                            <?php }
 					?>
@@ -172,7 +201,7 @@ jQuery(document).ready(function (){
 				// dynamic table
 				jQuery('#dbase').dataTable({
 				   "sPaginationType": "full_numbers",
-				   "aaSortingFixed": [[4,'asc']],
+				   "aaSortingFixed": [[0,'asc']],
 				   "fnDrawCallback": function(oSettings) {
 					  jQuery.uniform.update();
 				   }

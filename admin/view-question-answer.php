@@ -79,12 +79,12 @@ jQuery(document).ready(function (){
 		
         	<div class="contentinner content-dashboard">
 			
-            <table class="table table-bordered" id="dbase">
+            <table class="table table-bordered" id="leads">
                     <colgroup>
                         <col class="con0" />
                         <col class="con1" />
                         <col class="con0" />
-                        <col class="con1" />
+
 
                     </colgroup>
  
@@ -93,7 +93,7 @@ jQuery(document).ready(function (){
                             <th class="centeralign">Question</th>
                             <th class="centeralign">Answer</th>
                             <th class="centeralign"></th>
-                            <th class="centeralign">Delete</th>
+
 							
                     </thead>
                     <tbody>
@@ -115,7 +115,8 @@ jQuery(document).ready(function (){
                                 {
                                     //echo 'Input text'; ?> 
                                 <input type="text" >
-                                <?php
+                                  <?php 
+                               
                                 }
                                 if($question['type'] === 'Select')
                                 {
@@ -124,11 +125,8 @@ jQuery(document).ready(function (){
                                    $reqAnswer = $bdd->query('SELECT answers.text AS answer, answers.ref AS ref FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id='.$question['id']) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
                                     while ($answer = $reqAnswer->fetch())
                                     {
-                                        echo '<option value="'.$answer['answer'].'">'.$answer['answer'].'</option>';
-                                              
+                                        echo '<option value="'.$answer['answer'].'">'.$answer['answer'].'<i> --- Reference : '.$answer['ref'].'</i></option>';
                                     }
-                                     echo '<input type="text" value="'.$answer['ref'].'" name="ref" placeholder="Reference" />';
-
                                     ?> </select> <?php
                                     
                                 }
@@ -138,9 +136,7 @@ jQuery(document).ready(function (){
                                      $reqAnswer = $bdd->query('SELECT answers.text AS answer, answers.ref AS ref  FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id='.$question['id']) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
                                     while ($answer = $reqAnswer->fetch())
                                     {
-                                        echo '<INPUT type= "radio" name="rqdio" value="'.$answer['answer'].'">'.$answer['answer'];
-                                        echo '<input type="text" value="'.$answer['ref'].'" name="ref" placeholder="Reference" /></br>';
-                                            
+                                        echo '<INPUT type= "radio" name="rqdio" value="'.$answer['answer'].'">'.$answer['answer'].'<i> --- Reference : '.$answer['ref'].'</i></br>';
                                     }
                                 }
                                  if($question['type'] === 'Checkbox')
@@ -149,24 +145,19 @@ jQuery(document).ready(function (){
                                      $reqAnswer = $bdd->query('SELECT answers.text AS answer, answers.ref AS ref  FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id='.$question['id']) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
                                     while ($answer = $reqAnswer->fetch())
                                     {
-                                        echo '<INPUT type= "checkbox" name="checkbox" value="'.$answer['answer'].'">'.$answer['answer'];
-                                        echo '<input type="text" value="'.$answer['ref'].'" name="ref" placeholder="Reference" /></br>';
+                                        echo '<INPUT type= "checkbox" name="checkbox" value="'.$answer['answer'].'">'.$answer['answer'].'<i> --- Reference : '.$answer['ref'].'</i></br>';
                                               
                                     }
                                 }
                                  if($question['type'] === 'Textarea')
                                 {
-                                    //echo 'Textarea';
-                                    echo ' <textarea rows="1" cols="4"></textarea>        ';
-                                    echo '<input type="text" value="'.$answer['ref'].'" name="ref" placeholder="Reference" /></br>';
-
-                                }?>
+                                     
+                                       echo ' <textarea rows="1" cols="4"></textarea>        ';
+                                }?> 
                             </td>
                             <td class="centeralign"> <a href="update-question-answer.php?id=<?php echo $question['id'] ?>" ><input type="button" class="btn btn-success" name="update" value="Update"> </a>
                             </td>
-                            <td class="centeralign" >
-                              <a href="" id="delete'.question['id'].'" class="deleterowcustomized"><span class="icon-trash"></span></a>
-                            </td>
+                           
                             
                         </form>
                         </tr>				
@@ -176,9 +167,9 @@ jQuery(document).ready(function (){
 				</table>
 				<script type="text/javascript">
 				// dynamic table
-				jQuery('#dbase').dataTable({
+				jQuery('#leads').dataTable({
 				   "sPaginationType": "full_numbers",
-				   "aaSortingFixed": [[4,'asc']],
+				   "aaSortingFixed": [[0,'asc']],
 				   "fnDrawCallback": function(oSettings) {
 					  jQuery.uniform.update();
 				   }
