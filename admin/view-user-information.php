@@ -1,9 +1,12 @@
 <?php
-// On inclut la page de paramètre de connection.
+// Oit includes parameters de connection
 include('conf.php');
 
+// it recovers the id
 $id=$_GET['id'];
 
+
+//ACTIVATION AND DESACTIVATION of the status
 if(isset($_POST['deactivate']))
 {
  
@@ -81,7 +84,7 @@ jQuery(document).ready(function (){
                     	<div class="span3 profile-left">
                             
                             <?php
-					// On récupère tout le contenu de la table 'client'
+					// it recovers contents from the table admin and admin rights
 					$reponse = $bdd->query('SELECT admin.* , admin_rights.descr FROM admin, admin_rights WHERE admin.id='.$id.' AND admin.admin_rights_id=admin_rights.id') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
 					// On affiche chaque entrée une à une et celà tant qu'il y en a
 					while ($donnees = $reponse->fetch())

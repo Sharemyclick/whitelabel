@@ -1,13 +1,7 @@
 <?php
-// On inclut la page de paramètre de connection.
+//it includes parameters connection
 include('conf.php');
 
-// On vérifie que le user est connecté sinon on le renvoie à la page de connection
-session_start();  
-if(!isset($_SESSION['login'])) {  
-  echo '<script>document.location.href="dashboard.php"</script>';  
-  exit;  
-}
 ?>
 
 <!DOCTYPE html>
@@ -125,9 +119,9 @@ jQuery( "#pid_name" ).change(function() {
 								<select name="pid_name" id="pid_name" class="uniformselect">
 									<option value="0">Choose : ----</option>
                                     <?php
-									// On récupère tout le contenu de la table 'pid'
+									// The entire contents of the table 'pid' is recovered 
 									$reponse = $bdd->query('SELECT * FROM pid ORDER BY `id`') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
-									// On affiche chaque entrée une à une et celà tant qu'il y en a
+									// display each enters so far there are
 									while ($row = $reponse->fetch()){
 									echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
 									}?>

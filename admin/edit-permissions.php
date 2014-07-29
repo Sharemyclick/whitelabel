@@ -1,5 +1,5 @@
 <?php
-// On inclut la page de paramÃ¨tre de connection.
+// It includes the page parameter connection.
 include('conf.php');
 
 

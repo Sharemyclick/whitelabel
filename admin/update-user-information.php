@@ -1,5 +1,5 @@
 <?php
-// On inclut la page de paramètre de connection.
+// it includes parameters connection
 include('conf.php');
 
 $id=$_GET['id'];
@@ -81,6 +81,8 @@ jQuery(document).ready(function (){
                     	<div class="span3 profile-left">
                             
                             <?php
+                            
+                            //IF SUBMIT --------> UPDATE DATABASE
                      if(isset($_POST['submit'])){
                          $bdd->exec('UPDATE admin SET login="'.$_POST['login'].'" , password="'.$_POST['password'].'" , email="'.$_POST['email'].' ", name = "'.$_POST['name'].'", company = "'.$_POST['company'].'", address = "'.$_POST['address'].'", postal_code ="'.$_POST['postal_code'].'", city = "'.$_POST['city'].'", telephone="'.$_POST['telephone'].'", iban="'.$_POST['iban'].'", swift_bic="'.$_POST['swift_bic'].'", vat = "'.$_POST['vat'].'", admin_rights_id="'.$_POST['admin_rights_id'].'" WHERE id='.$id);
                          
@@ -102,7 +104,7 @@ jQuery(document).ready(function (){
                 Else {?>
                             
                             <?php
-					// On récupère tout le contenu de la table 'client'
+					// it recovers the contents from the table ADMIN AND ADMIN_RIGHT
 					$reponse = $bdd->query('SELECT admin.* , admin_rights.descr FROM admin, admin_rights WHERE admin.id='.$id.' AND admin.admin_rights_id=admin_rights.id') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
 					// On affiche chaque entrée une à une et celà tant qu'il y en a
 					while ($donnees = $reponse->fetch())
@@ -203,6 +205,8 @@ jQuery(document).ready(function (){
                                 <p>
                                     <button type="submit" class="btn btn-primary" name="submit" >Update Profile</button> &nbsp; 
                                         <?php 
+                                        
+                                        //ACTIVATE AND DESACTIVATE THE STATUS
                                             if ($donnees['status']=='active')
                                             {
                                                 ?><input type="button" class="btn btn-success" value="Status : Active">

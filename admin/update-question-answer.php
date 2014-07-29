@@ -1,14 +1,11 @@
 <?php
-// On inclut la page de paramÃ¨tre de connection.
+// it includes parameters connection
 include('conf.php');
 
-
 $id=$_GET['id'];
-
+//request from tables questions and answers
 $reqQuestion = $bdd->query('SELECT * FROM questions WHERE id='.$id) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
 $reqAnswer = $bdd->query('SELECT * FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id='.$id) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
-
-
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +99,7 @@ $reqAnswer = $bdd->query('SELECT * FROM answers LEFT JOIN answers_questions ON a
         for ($ans = 0; $ans<$_POST['nb_answer_insert']; $ans++)
         {
             $reqInsertAnswer = $bdd->prepare('INSERT INTO answers(text, ref) VALUES (:text, :ref)');
-// On execute la requête en lui transmettant la liste des paramètres
+// We execute the request by transmitting the parameter list
 	$reqInsertAnswer->execute(array(
 		'text' => $_POST['answer'.$ans],
                 'ref' => $_POST['ref'.$ans]
@@ -113,7 +110,7 @@ $reqAnswer = $bdd->query('SELECT * FROM answers LEFT JOIN answers_questions ON a
         //echo 'answer num'.$ans.' inseree dans answer </br>';
         
         $reqInsertAnswerQuestion = $bdd->prepare('INSERT INTO answers_questions (answers_id, questions_id) VALUES (:answers_id, :questions_id)');
-// On execute la requête en lui transmettant la liste des paramètres
+// We execute the request by transmitting the parameter list
 	$reqInsertAnswerQuestion->execute(array(
 		'answers_id' => $idAnswer,
                 'questions_id' => $id
@@ -187,6 +184,7 @@ $reqAnswer = $bdd->query('SELECT * FROM answers LEFT JOIN answers_questions ON a
                             <span class="field">
                                 <?php
                                 $i=0;
+                                //FOR EXISTING ANSWERS
                                 while ($answer = $reqAnswer->fetch())
                                     {   
                                          ?>  <input type="text" value="<?php echo $answer['text'];?>" name="answer<?php echo $i; ?>" class="input-xxlarge" /> 
@@ -194,7 +192,7 @@ $reqAnswer = $bdd->query('SELECT * FROM answers LEFT JOIN answers_questions ON a
   <?php $i=$i+1;
                                     }
                                     $nb=$i;
-
+                                // FOR NEWS ANSWERS GENERATED
                                 if(isset($_POST['generate']))
                                 {
                                     for ($a=1; $a<=$_POST['nb_answer'];$a++)

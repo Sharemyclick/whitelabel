@@ -1,5 +1,5 @@
 <?php
-// On inclut la page de paramètre de connection.
+// it includes parameters connection
 include('conf.php');
 
 ?>
@@ -89,9 +89,9 @@ jQuery(document).ready(function (){
                     </thead>
                     <tbody>
 					<?php
-					// On récupère tout le contenu de la table 'client'
+					// It recovers all the contents of the table 'customer'
 					$reponse = $bdd->query('SELECT * FROM admin ') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
-					// On affiche chaque entrée une à une et celà tant qu'il y en a
+					// display each enters so far there are
 					while ($donnees = $reponse->fetch())
 						{?>
                         <tr>

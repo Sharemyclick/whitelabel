@@ -1,14 +1,14 @@
 <?php  
 include('conf.php');
 
-// On active les sessions :
+// Session activation
 	session_start();
 
-// Suppression des variables de session et de la session
+// Destroy variables session and the session
 $_SESSION = Array();
 session_destroy;
 
-// On redirige le visiteur vers la page désirée :
+// redirecting to the page:
 	header('Location: index.php');
 	exit();
 ?>

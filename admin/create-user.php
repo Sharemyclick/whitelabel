@@ -1,5 +1,5 @@
 <?php
-// On inclut la page de paramètre de connection.
+//It includes the page parameter connection.
 include('conf.php');
 
 
@@ -15,8 +15,8 @@ if(isset($_POST['submit'])){
             $taille = filesize($_FILES['logo']['tmp_name']);
             $extensions = array('.png', '.gif', '.jpg', '.jpeg', '.JPG', '.JPEG', '.GIF', '.PNG');
             $extension = strrchr($_FILES['logo']['name'], '.'); 
-    // Début des vérifications de sécurité...
-    if(!in_array($extension, $extensions)) // Si l'extension n'est pas dans le tableau
+    // Start safety checks ...
+    if(!in_array($extension, $extensions)) // If the extension is not in the table
             {
         $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg ...';
             }
@@ -24,15 +24,15 @@ if(isset($_POST['submit'])){
             {
         $erreur = 'l\'image est trop lourde. Maximum de 500ko...';
             }
-    if(!isset($erreur)) //S'il n'y a pas d'erreur, on upload
+    if(!isset($erreur)) //if error=null, upload the picture
             {
-            // On formate le nom du fichier ici...
+            // It formats the file name 
             $fichier = strtr($fichier, 
                         'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
                 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
             $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
 
-            if(move_uploaded_file($_FILES['logo']['tmp_name'], $dossier . $fichier)) // Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+            if(move_uploaded_file($_FILES['logo']['tmp_name'], $dossier . $fichier)) // If the function returns TRUE, it worked
                 {
 
                     foreach($_POST as $indPost => $valPost){
@@ -47,7 +47,7 @@ if(isset($_POST['submit'])){
 
 	$req = $bdd->prepare('INSERT INTO admin(login, password, email, name, status, company, logo, address, postal_code, city, telephone, iban, swift_bic, vat,  admin_rights_id)'.
                 'VALUES (:login, :password, :email, :name, :status, :company, :logo, :address, :postal_code, :city, :telephone, :iban, :swift_bic, :vat,  :admin_rights_id)');
-// On execute la requête en lui transmettant la liste des paramètres
+// We execute the request by transmitting the parameter list
 	$req->execute(array(
 		'login' => $_POST['login'],
                 'password' => $_POST['password'],
@@ -65,7 +65,7 @@ if(isset($_POST['submit'])){
 		'vat' =>  $_POST['vat'],
 		'admin_rights_id' =>  $_POST['admin_rights_id']
                 
-		)) or die(print_r($req->errorInfo())); // On traque l'erreur s'il y en a une
+		)) or die(print_r($req->errorInfo())); // Oit tracks error if there is one
 }}
 ?>
 <!DOCTYPE html>

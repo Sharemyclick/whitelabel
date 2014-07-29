@@ -1,6 +1,6 @@
 <?php
-// On inclut la page de paramètre de connection.
-include('conf.php');
+//It includes the page parameter connection.
+        include('conf.php');
  
 if(!isset($_SESSION['login'])) {  
   echo '<script>document.location.href="dashboard.php"</script>';  

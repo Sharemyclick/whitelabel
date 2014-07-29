@@ -4,9 +4,9 @@ include('conf.php');
 		{
 	//extract($_POST);
 
-	// On récupère tout le contenu de la table "pid"
+	// recovering the entire contents of the table "pid"
 	$req = $bdd->prepare('INSERT INTO pid (name, price, country, color_code, pixel) VALUES(:name,:price,:country,:color_code,:pixel)');
-	// On execute la requête en lui transmettant la liste des paramètres
+	//We execute the request by transmitting the parameter list
 	$req->execute(array(
 		'name' => $_POST['name'],
 		'price' => $_POST['price'],
@@ -14,11 +14,11 @@ include('conf.php');
 		'color_code' => $_POST['colorpicker'],
                 'pixel' => $_POST['pixel']
 		)
-		) or die(print_r($req->errorInfo())); // On traque l'erreur s'il y en a une
-	// On termine le traitement de la requête
+		) or die(print_r($req->errorInfo())); // It tracks the error if there is one
+                // The request processing is completed
 	$req->closeCursor();
 	}
 
-	// Redirection du visiteur vers la page suivante  
+	// Redirect the visitor to the next page
        header("location:pid.php");
 ?>

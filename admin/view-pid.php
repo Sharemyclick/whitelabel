@@ -1,5 +1,5 @@
 <?php
-// On inclut la page de paramètre de connection.
+// it includes parameters of connection
 include('conf.php');
 
 ?>
@@ -40,7 +40,7 @@ include('conf.php');
 					  success: function(data, textStatus, jqXHR) {
 					  },
 					  error: function(jqXHR, textStatus, errorThrown) {
-						// Une erreur s'est produite lors de la requete
+						// error occured during the request
 					  }
 				 });
 				jQuery(this).parents('tr').fadeOut(function(){
@@ -132,9 +132,9 @@ include('conf.php');
                     </thead>
                     <tbody>
 					<?php
-					// On récupère tout le contenu de la table 'client'
+					// data from table pid
 					$reponse = $bdd->query('SELECT * FROM pid') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
-					// On affiche chaque entrée une à une et celà tant qu'il y en a
+					
 					while ($donnees = $reponse->fetch())
 						{?>
                         <tr>

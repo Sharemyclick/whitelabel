@@ -1,15 +1,6 @@
 <?php
-// On inclut la page de paramètre de connection.
+// it includes parameters connection
 include('conf.php');
-
-//if (isset($_POST['delete']))
-   // {
-    //echo 'coucou';
-    //$bdd->exec('DELETE FROM answers_questions WHERE questions_id='.$question['id']); 
-    //$bdd->exec('DELETE FROM answers WHERE id='.$answer['id']); 
-    //$bdd->exec('DELETE FROM questions WHERE id='.$question['id']); 
-    //}
-    
 
 ?>
 <!DOCTYPE html>
@@ -98,9 +89,8 @@ jQuery(document).ready(function (){
                     </thead>
                     <tbody>
 					<?php
-					// On récupère tout le contenu de la table 'client'
+					// Request for data from questions
 					$reqQuestion = $bdd->query('SELECT * FROM questions ORDER BY text ASC') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
-					// On affiche chaque entrée une à une et celà tant qu'il y en a
 					while ($question = $reqQuestion->fetch())
 						{?>
                         <tr>
@@ -111,6 +101,7 @@ jQuery(document).ready(function (){
                             </td>
                             <td class="centeralign" style="text-align: left">
                                 <?php 
+                                //if question type is input
                                 if($question['type'] === 'Input text')
                                 {
                                     //echo 'Input text'; ?> 
@@ -118,6 +109,7 @@ jQuery(document).ready(function (){
                                   <?php 
                                
                                 }
+                                //if question type is select
                                 if($question['type'] === 'Select')
                                 {
                                     //echo 'Select';
@@ -130,6 +122,7 @@ jQuery(document).ready(function (){
                                     ?> </select> <?php
                                     
                                 }
+                                //if question type is radio
                                  if($question['type'] === 'Radio')
                                 {
                                     //echo 'Radio';
@@ -139,6 +132,7 @@ jQuery(document).ready(function (){
                                         echo '<INPUT type= "radio" name="rqdio" value="'.$answer['answer'].'">'.$answer['answer'].'<i> --- Reference : '.$answer['ref'].'</i></br>';
                                     }
                                 }
+                                //if question type is checkbox
                                  if($question['type'] === 'Checkbox')
                                 {
                                    // echo 'Checkbox';
@@ -149,6 +143,7 @@ jQuery(document).ready(function (){
                                               
                                     }
                                 }
+                                //if question type is textarea
                                  if($question['type'] === 'Textarea')
                                 {
                                      
