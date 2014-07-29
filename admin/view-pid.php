@@ -116,7 +116,7 @@ include('conf.php');
                         <col class="con1" />
                         <col class="con0" />
                         <col class="con1" />
-						<col class="con0" />
+                        <col class="con0" />
                     </colgroup>
                     <thead>
                         <tr>
@@ -126,6 +126,7 @@ include('conf.php');
                             <th class="centeralign">Pid country</th>
                             <th class="centeralign">Pid pixel</th>
                             <th class="centeralign">Tracking Link</th>
+                            <th class="centeralign">Color</th>
                             
                         </tr>
                     </thead>
@@ -135,16 +136,18 @@ include('conf.php');
 					$reponse = $bdd->query('SELECT * FROM pid') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
 					// On affiche chaque entrée une à une et celà tant qu'il y en a
 					while ($donnees = $reponse->fetch())
-						{
-                        echo '<tr>';
-                        	echo '<td class="centeralign"><input type="checkbox" /></td>';
-                            echo '<td class="centeralign">'.$donnees['name'].'</td>';
-                            echo '<td class="centeralign">'.$donnees['price'].'</td>';
-                            echo '<td class="centeralign">'.$donnees['country'].'</td>';
-                            echo '<td class="centeralign"><textarea name="pid_pixel" id="pid_pixel">'.$donnees['pixel'].'</textarea></td>';
-                            echo '<td class="centeralign"><a href="http://xxxxxxxxxx.actu-du-jour.com/?pid='.$donnees['id'].'&firstname=&lastname=&gender=&email=&city=&postal_code=&address=&telephone=&dob=&country=" target="_blank">http://concours.sharemydeal.net/?pid='.$donnees['id'].'&firstname=&lastname=&gender=&email=&city=&postal_code=&address=&telephone=&dob=&country=</td>';
-                            echo '</tr>';
-						}
+						{?>
+                        <tr>
+                            <td class="centeralign"><input type="checkbox" /></td>
+                            <td class="centeralign"> <?php echo $donnees['name']; ?> </td>
+                            <td class="centeralign"> <?php echo $donnees['price']; ?></td>
+                            <td class="centeralign"> <?php echo $donnees['country'] ?> </td>
+                            <td class="centeralign"><textarea name="pixel" id="pixel"> <?php echo $donnees['pixel']; ?></textarea></td>
+                            <td class="centeralign"><a href="http://xxxxxxxxxx.actu-du-jour.com/?pid=<?php echo $donnees['id'];?>&firstname=&lastname=&gender=&email=&city=&postal_code=&address=&telephone=&dob=&country=" target="_blank">http://concours.sharemydeal.net/?pid=<?php echo $donnees['id']; ?>&firstname=&lastname=&gender=&email=&city=</br>&postal_code=&address=&telephone=&dob=&country=</td>
+                            <td class="centeralign" > <div id="divColor" style="text-align:center" > <div style="width:20px;height:20px;background-color:<?php if(!empty($donnees['color_code'])){echo $donnees['color_code'];} ?>"> </div> </td>
+
+                        </tr>
+						<?php }
 					?>
                     </tbody>
                 </table>

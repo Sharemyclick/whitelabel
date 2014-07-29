@@ -185,7 +185,7 @@ jQuery('[id=li-dashboard]').removeClass('active');
                          <div id="wiz1step2_5">
                         	<h4>Step 5: Enter the Pixel </h4>
                                 <p>
-                                    <label>Pid country</label>
+                                    <label>Pixel</label>
                                     <span class="field"><textarea name="pixel" rows="4" cols="8"></textarea>   </span>
                                 </p>
                         </div>

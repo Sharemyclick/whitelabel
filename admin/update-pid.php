@@ -2,6 +2,12 @@
 // On inclut la page de paramètre de connection.
 include('conf.php');
 
+// On vérifie que le user est connecté sinon on le renvoie à la page de connection
+session_start();  
+if(!isset($_SESSION['login'])) {  
+  echo '<script>document.location.href="dashboard.php"</script>';  
+  exit;  
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,22 +34,22 @@ jQuery('[id=li-dashboard]').removeClass('active');
 		jQuery('[id=li-pid]').addClass('active');
 		});
 jQuery(document).ready(function(){
-jQuery( "#name" ).change(function() {
+jQuery( "#pid_name" ).change(function() {
 	if(jQuery(this).val() != 0){
-	var id =  jQuery(this).val();
+	var pid_id =  jQuery(this).val();
 	jQuery.ajax({
 				  type: 'GET', 
 				  contentType: "application/json",
-				  url: 'http://actu-du-jour.com/admin/commandRequest.php', 
+				  url: 'http://127.0.0.1/white_label/admin/commandRequest.php', 
 				  dataType : 'json',
 				  data: {
 					action: 'updatePid',
-					id : id
+					id : pid_id
 				  }, 
 				  success: function(data, textStatus, jqXHR) {
-					jQuery( "#price" ).val(data['price']);
-					jQuery( "#country" ).val(data['country']);
-					jQuery( "#pixel" ).val(data['pixel']);
+					jQuery( "#pid_price" ).val(data['price']);
+					jQuery( "#pid_country" ).val(data['country']);
+					jQuery( "#pid_pixel" ).val(data['pixel']);
 					jQuery( "#divColor" ).css("background-color",data['color']);
 					jQuery( "#divColor" ).css("color",data['color']);
 					// La reponse du serveur est contenu dans data
@@ -54,9 +60,9 @@ jQuery( "#name" ).change(function() {
 				  }
 			 });
 		}else{
-				jQuery( "#price" ).val('');
-					jQuery( "#country" ).val('');
-					jQuery( "#pixel" ).val('');
+				jQuery( "#pid_price" ).val('');
+					jQuery( "#pid_country" ).val('');
+					jQuery( "#pid_pixel" ).val('');
 					jQuery( "#divColor" ).css("background-color","white");
 					jQuery( "#divColor" ).css("color","white");
 		}
@@ -116,11 +122,11 @@ jQuery( "#name" ).change(function() {
 							<p>
                                 <label>Select one pid</label>
                                 <span class="field">
-								<select name="name" id="name" class="uniformselect">
+								<select name="pid_name" id="pid_name" class="uniformselect">
 									<option value="0">Choose : ----</option>
                                     <?php
 									// On récupère tout le contenu de la table 'pid'
-									$reponse = $bdd->query('SELECT * FROM `pid` ORDER BY `id`') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
+									$reponse = $bdd->query('SELECT * FROM pid ORDER BY `id`') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
 									// On affiche chaque entrée une à une et celà tant qu'il y en a
 									while ($row = $reponse->fetch()){
 									echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
@@ -130,15 +136,15 @@ jQuery( "#name" ).change(function() {
                             </p>  
 							<p>
                                 <label>Modify pid price</label>
-                                <span class="field"><input type="text" name="price" id="pid_price" class="input-xxlarge" required="required" /></span>
+                                <span class="field"><input type="text" name="pid_price" id="pid_price" class="input-xxlarge" required="required" /></span>
                             </p>
 							<p>
                                 <label>Modify pid country</label>
-                                <span class="field"><input type="text" name="country" id="pid_country" class="input-xxlarge" required="required" /></span>
+                                <span class="field"><input type="text" name="pid_country" id="pid_country" class="input-xxlarge" required="required" /></span>
                             </p>
 							<p>
                                 <label>Modify pid pixel</label>
-                                <span class="field"><textarea name="pixel" id="pid_pixel" class="input-xxlarge" required="required"></textarea></span>
+                                <span class="field"><textarea name="pid_pixel" id="pid_pixel" class="input-xxlarge" required="required"></textarea></span>
                             </p>
 							<p>
                                 <label>Modify pid color (for graphs)</label>

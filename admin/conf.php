@@ -14,7 +14,7 @@ catch (Exception $e)
 	die('Erreur : '.$e->getMessage());
 }
 
-
+if($_SERVER['REMOTE_ADDR'] != '127.0.0.1'){
 
 if(!isset($_SESSION['first_log']) || $_SESSION['first_log'] === false){
 $file_url = str_replace(".php","",$url_temp);
@@ -27,4 +27,5 @@ $file_url = str_replace(".php","",$url_temp);
         }*/
 }
 //$_SESSION['first_log'] = false;
+}
 ?>
