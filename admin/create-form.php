@@ -1,72 +1,29 @@
 <?php
-// On inclut la page de paramètre de connection.
+// it includes parameters connetion
 include('conf.php');
 
 
-$req_admin_rights = $bdd->query('SELECT * FROM admin_rights') or die(print_r($bdd->errorInfo()));
 
 if(isset($_POST['submit'])){
     
-    if(empty($sponsor_image))
-            {
-            $dossier = 'C:/xampp/htdocs/white_label/admin/img/logo/';//TODO remove local part when upload to server !!
-            $fichier = basename($_FILES['logo']['name']);
-            $taille_maxi = 300000;
-            $taille = filesize($_FILES['logo']['tmp_name']);
-            $extensions = array('.png', '.gif', '.jpg', '.jpeg', '.JPG', '.JPEG', '.GIF', '.PNG');
-            $extension = strrchr($_FILES['logo']['name'], '.'); 
-    // Début des vérifications de sécurité...
-    if(!in_array($extension, $extensions)) // Si l'extension n'est pas dans le tableau
-            {
-        $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg ...';
-            }
-    if($taille>$taille_maxi)
-            {
-        $erreur = 'l\'image est trop lourde. Maximum de 500ko...';
-            }
-    if(!isset($erreur)) //S'il n'y a pas d'erreur, on upload
-            {
-            // On formate le nom du fichier ici...
-            $fichier = strtr($fichier, 
-                        'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
-                'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
-            $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
-
-            if(move_uploaded_file($_FILES['logo']['tmp_name'], $dossier . $fichier)) // Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-                {
-
-                    foreach($_POST as $indPost => $valPost){
-                            $checkpos = strpos($indPost, "result_");
-                            if($checkpos !== false)
-                                    $result .= $valPost;
-                    }
-                }
-            }
-
+    foreach ($_POST['idQuestion'] as $selectedOption)
+    echo $selectedOption."\n";
+ 
+    	/*foreach($_POST['idQuestion'] as $idQuestionChoose){
+            $req1 = $bdd->prepare('SELECT id FROM questions_answers WHERE questions_id = :q  AND answers_id = :a');
+            $req1->execute(array('q' => $questionsid,'a' => $idQuestionChoose));
+            $res1 = $req1->fetch();
+    if(empty($res1)){
+            $req2 = $bdd->prepare('INSERT INTO questions_answers (questions_id,answers_id) VALUES(:questions_id,:answers_id)');
+            $sql = $req2->execute(array(
+                'questions_id' => $id,
+                'answers_id' => $idQuestionChoose 
+              )) or die(print_r($req2->errorInfo())); // On traque l'erreur s'il y en a une
+*/
+    }
+	
     
 
-	$req = $bdd->prepare('INSERT INTO admin(login, password, email, name, status, company, logo, address, postal_code, city, telephone, iban, swift_bic, vat,  admin_rights_id)'.
-                'VALUES (:login, :password, :email, :name, :status, :company, :logo, :address, :postal_code, :city, :telephone, :iban, :swift_bic, :vat,  :admin_rights_id)');
-// On execute la requête en lui transmettant la liste des paramètres
-	$req->execute(array(
-		'login' => $_POST['login'],
-                'password' => $_POST['password'],
-                'email' => $_POST['email'],
-                'name' => $_POST['name'],
-                'status' => $_POST['status'],
-                'company' => $_POST['company'],
-                'logo' => $_FILES['logo']['name'],    
-                'address' => $_POST['address'],
-                'postal_code' => $_POST['postal_code'],
-                'city' => $_POST['city'],
-		'telephone' => $_POST['telephone'],
-		'iban' =>  $_POST['iban'],
-                'swift_bic' =>  $_POST['swift_bic'],
-		'vat' =>  $_POST['vat'],
-		'admin_rights_id' =>  $_POST['admin_rights_id']
-                
-		)) or die(print_r($req->errorInfo())); // On traque l'erreur s'il y en a une
-}}
 ?>
 <!DOCTYPE html>
 <head>
@@ -128,7 +85,7 @@ jQuery(document).ready(function (){
             
         </div><!--breadcrumbwidget-->
         <div class="pagetitle">
-        	<h1>Create User</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new user.</span>
+        	<h1>Create User</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new form.</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">
@@ -139,112 +96,86 @@ jQuery(document).ready(function (){
                      if(isset($_POST['submit'])){
                          ?>   
                 
-                         <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The User has been created </h4> </br>
+                         <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The fom has been created </h4> </br>
                                     <p class="stdformbutton" style="text-align: center" >
-                                      <a href="create-user.php" >
-                                        <button type="button" name="create_another_user" id="create_another_advertiser" class="btn btn-primary" >Create another advertiser </button>
+                                      <a href="create-form.php" >
+                                        <button type="button" name="create_another_form" id="create_another_form" class="btn btn-primary" >Create another form </button>
                                       </a>
-                                     <a href="view-users.php" >
-                                        <button type="button" name="view_all_user" id="view_all_advertiser" class="btn btn-primary" >View all advertisers </button>
+                                     <a href="view-form.php" >
+                                        <button type="button" name="view_all_form" id="view_all_form" class="btn btn-primary" >View all forms </button>
                                       </a>
                                 </p>           
                 <?php ;}
                 Else {?>
 			<div class="widgetcontent">
 			
-            	<h4 class="widgettitle nomargin shadowed">User's informations</h4>
+            	<h4 class="widgettitle nomargin shadowed">Form information</h4>
 					
                 <div class="widgetcontent bordered shadowed nopadding">
                     <form name="form_user" class="stdform stdform2" method="post" action="" enctype="multipart/form-data">
                         
                         <p>
-                            <label>Login *</label>
-                            <span class="field"><input type="text" name="login" class="input-xxlarge" required="required" /></span>
-                        </p>
-                        
-                        <p>
-                            <label>Password *</label>
-                            <span class="field"><input type="text" name="password" class="input-xxlarge" required="required" /></span>
-                        </p>
-                        
-                        <p>
-                            <label>Email *</label>
-                            <span class="field"><input type="email" name="email" class="input-xxlarge" required="required" /></span>
-                        </p>
-
-                        <p>
-                            <label>Full Name *</label>
+                            <label>Form name *</label>
                             <span class="field"><input type="text" name="name" class="input-xxlarge" required="required" /></span>
                         </p>
                         
                         <p>
-                            <label>Status *</label>
-                            <span class="field">
-                                <select name="status" id="status" class="status">
-                                        <option value="active"> Active</option>
-                                        <option value="non-active"> Non-active</option>
-                                </select>  
-                            </span>
+                            <label>h1 - Text description *</label>
+                            <span class="field"><input type="text" name="h1" class="input-xxlarge" required="required" /></span>
                         </p>
                         
                         <p>
-                            <label>Company *</label>
-                        <span class="field"><input type="text" id="company"  name="company" class="input-xxlarge" required="required" /></span>
-                        </p>
-                        
-                        <p>
-                            <label>Logo <span style="color: red"> (nom sans espace)</span></label>
-                           <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
-                           <span class="field"><input type="file" name="logo" id="logo" /></span>
-			</p>
-
-                        <p>
-                            <label>Address *</label>
-                        <span class="field"><input type="text" id="address"  name="address" class="input-xxlarge" required="required" /></span>
-                        </p>
-                        
-                        <p>
-                            <label>Postal Code *</label>
-                        <span class="field"><input type="text" id="postal_code"  name="postal_code" class="input-xxlarge" required="required" /></span>
-                        </p>
-                        
-                         <p>
-                            <label>City *</label>
-                        <span class="field"><input type="text" id="city"  name="city" class="input-xxlarge" required="required" /></span>
-                        </p>
-                        
-                        <p>
-                            <label>Telephone </label>
-                        <span class="field"><input type="text" name="telephone" class="input-xxlarge" /></span>
+                            <label>Text *</label>
+                            <span class="field"><input type="text" name="text" class="input-xxlarge" required="required" /></span>
                         </p>
 
                         <p>
-                            <label>IBAN *</label>
-                            <span class="field"><input type="text" name="iban" class="input-xxlarge" required="required" /></span>
-                        </p>
-                        
-                        <p>
-                            <label>SWIFT BIC *</label>
-                            <span class="field"><input type="text" name="swift_bic" class="input-xxlarge" required="required" /></span>
-                        </p>
-                        
-                        <p>
-                            <label>VAT *</label>
-                            <span class="field"><input type="text" name="vat" class="input-xxlarge" required="required" /></span>
-                        </p>
-                        
-                        <p>
-                            <label>User Right *</label>
+                            <label>Field Type*</label>
                             <span class="field">
-                                <select id="admin_rights_id" name="admin_rights_id">
-							<?php while ($donnees = $req_admin_rights->fetch())
-							{?>
-							<option value="<?php echo $donnees['id']; ?>"><?php echo $donnees['descr']; ?></option>
-							<?php }?>
+                                <select  name="field_type" id="field_type" class="status" >
+                                    <?php 
+                                        $reqField = $bdd->query("SELECT * FROM field_type");
+                                        while ($field = $reqField->fetch())
+                                        {
+                                            ?>
+                                    <option value="<?php echo $field['name']; ?>"> <?php echo $field['name']; ?> </option>
+                                            <?php
+                                        }
+                                    ?>
+                                    
                                 </select>
                             </span>
                         </p>
-                                             
+                        
+                        <p>
+                            <label>Field *</label>
+                            <span class="field"><input type="text" name="field" class="input-xxlarge" required="required" /></span>
+
+                        </p>
+                        
+                        <p>
+                            <label>Select question(s)</label>
+                            <span id="dualselect" class="dualselect">
+                            	<select class="uniformselect"  name="idQuestion[]" multiple size="12" >
+                                    <?php
+                                    $reqQuestion = $bdd->query("SELECT * FROM questions ");
+                                    while ($question = $reqQuestion->fetch()){
+                                        $reqAnswer = $bdd->query("SELECT * FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id=".$question['id']);
+                                        ?>
+                                        <option value="<?php echo $question['id']; ?>"><?php echo $question['id'].' -- '.$question['text'];  while ($answer = $reqAnswer->fetch()){ echo '  //  '.$answer['text'];}?></option>
+                                    <?php }?>
+                                </select>
+                                <span class="ds_arrow" style="display:none;">
+                                	<button class="btn ds_prev"><i class="icon-chevron-left"></i></button><br />
+                                    <button class="btn ds_next"><i class="icon-chevron-right"></i></button>
+                                </span>
+                                <select name="select4[]" multiple style="display:none;" size="10">
+                                    <option value=""></option>
+                                </select>
+                            </span>
+                        </p>
+                        
+                                                                  
                         <p class="stdformbutton" style="text-align: center">
                             <button type="submit" name="submit" id="submit" class="btn btn-primary">Create </button>
                             <button type="reset" class="btn">Reset </button>
