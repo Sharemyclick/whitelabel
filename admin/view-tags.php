@@ -122,9 +122,8 @@ jQuery(document).ready(function (){
                     </thead>
                     <tbody>
 					<?php
-					// On récupère tout le contenu de la table 'client'
+					// it recovers all the contents fron tags
 					$reponse = $bdd->query('SELECT * FROM tags') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
-					// On affiche chaque entrée une à une et celà tant qu'il y en a
 					while ($donnees = $reponse->fetch())
 						{
                         echo '<tr>';
