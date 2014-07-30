@@ -2,61 +2,7 @@
 // it includes parameters connetion
 include('conf.php');
 
-
-
-if(isset($_POST['submit'])){
-    
-    /*echo $_POST['name'].'</br>';
-    echo $_POST['h1'].'</br>';
-    echo $_POST['text'].'</br>';
-    echo $_POST['field_type'].'</br>';
-    echo $_POST['field'].'</br>';
-    foreach ($_POST['idQuestion'] as $selectedOption)
-    echo $selectedOption."\n</br>";*/
-    
-    $reqForm = $bdd->prepare('INSERT INTO form (name, h1, text, fields, field_type_id) VALUES (:name, :h1, :text, :fields, :field_type_id)');
-	// We execute the request by transmitting the parameter list
-	$reqForm->execute(array(
-		'name' => $_POST['name'],
-		'h1' => $_POST['h1'],
-                'text' => $_POST['text'],
-                'fields' => $_POST['fields'],
-                'field_type_id' => $_POST['field_type_id']
-            
-		)) or die(print_r($reqForm->errorInfo())); // It tracks  the error if there is one
-                 $id_form = $bdd->lastInsertId();
-	// The request processing is terminated
-	$reqForm->closeCursor();
-        
-        foreach ($_POST['idQuestion'] as $selectedOption)
-        {
-            $reqForm = $bdd->prepare('INSERT INTO form_answers_questions (form_id, questions_id) VALUES (:form_id, :questions_id)');
-            // We execute the request by transmitting the parameter list
-            $reqForm->execute(array(
-		'form_id' => $id_form,
-		'questions_id' => $selectedOption
-            
-		)) or die(print_r($reqForm->errorInfo())); // It tracks  the error if there is one
-            // The request processing is terminated
-            $reqForm->closeCursor();
-            
-        }
-        
- 
-    	/*foreach($_POST['idQuestion'] as $idQuestionChoose){
-            $req1 = $bdd->prepare('SELECT id FROM questions_answers WHERE questions_id = :q  AND answers_id = :a');
-            $req1->execute(array('q' => $questionsid,'a' => $idQuestionChoose));
-            $res1 = $req1->fetch();
-    if(empty($res1)){
-            $req2 = $bdd->prepare('INSERT INTO questions_answers (questions_id,answers_id) VALUES(:questions_id,:answers_id)');
-            $sql = $req2->execute(array(
-                'questions_id' => $id,
-                'answers_id' => $idQuestionChoose 
-              )) or die(print_r($req2->errorInfo())); // On traque l'erreur s'il y en a une
-*/
-    }
-	
-    
+$id_form=$_GET['id'];
 
 ?>
 <!DOCTYPE html>
@@ -128,12 +74,36 @@ jQuery(document).ready(function (){
                 
                 <?php
                      if(isset($_POST['submit'])){
+                         
+//-----------------------------------------------------------------------------------// 
+        //UPDATE FORM
+        $bdd->exec(' UPDATE form SET name="'.$_POST['name'].'" , h1="'.$_POST['h1'].'", text="'.$_POST['text'].'", fields="'.$_POST['fields'].'", field_type_id="'.$_POST['field_type_id'].'"  WHERE id='.$id_form);
+//---------------------------------------------------------------------------------------//
+        //DELETE AND INSERT form_answers_questions
+        $bdd->exec('DELETE FROM form_answers_questions WHERE form_id='.$id_form); 
+        
+        foreach ($_POST['idQuestion'] as $selectedOption)
+        {
+            $reqForm = $bdd->prepare('INSERT INTO form_answers_questions (form_id, questions_id) VALUES (:form_id, :questions_id)');
+            // We execute the request by transmitting the parameter list
+            $reqForm->execute(array(
+		'form_id' => $id_form,
+		'questions_id' => $selectedOption
+            
+		)) or die(print_r($reqForm->errorInfo())); // It tracks  the error if there is one
+            // The request processing is terminated
+            $reqForm->closeCursor();
+            
+        }
+        
+//---------------------------------------------------------------------------------------//
+                         
                          ?>   
                 
                          <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The fom has been created </h4> </br>
                                     <p class="stdformbutton" style="text-align: center" >
-                                      <a href="create-form.php" >
-                                        <button type="button" name="create_another_form" id="create_another_form" class="btn btn-primary" >Create another form </button>
+                                        <a href="update-form-globalview.php" >
+                                        <button type="button" name="update_another_form" id="create_another_form" class="btn btn-primary" >update another form </button>
                                       </a>
                                      <a href="view-form.php" >
                                         <button type="button" name="view_all_form" id="view_all_form" class="btn btn-primary" >View all forms </button>
@@ -143,24 +113,28 @@ jQuery(document).ready(function (){
                 Else {?>
 			<div class="widgetcontent">
 			
-            	<h4 class="widgettitle nomargin shadowed">Form information</h4>
+            	<h4 class="widgettitle nomargin shadowed">Form informations</h4>
 					
                 <div class="widgetcontent bordered shadowed nopadding">
                     <form name="form_user" class="stdform stdform2" method="post" action="" enctype="multipart/form-data">
-                        
+                        <?php
+                            $reqForm = $bdd->query('SELECT * FROM form WHERE id='.$id_form) or die(print_r($bdd->errorInfo())); 
+                        while ($form = $reqForm->fetch())
+						{
+                        ?>
                         <p>
                             <label>Form name *</label>
-                            <span class="field"><input type="text" name="name" class="input-xxlarge" required="required" /></span>
+                            <span class="field"><input type="text" name="name" class="input-xxlarge" value="<?php echo $form['name']; ?>" /></span>
                         </p>
                         
                         <p>
                             <label>h1 - Text description *</label>
-                            <span class="field"><input type="text" name="h1" class="input-xxlarge" required="required" /></span>
+                            <span class="field"><input type="text" name="h1" class="input-xxlarge" value="<?php echo $form['h1']; ?>" /></span>
                         </p>
                         
                         <p>
                             <label>Text *</label>
-                            <span class="field"><input type="text" name="text" class="input-xxlarge" required="required" /></span>
+                            <span class="field"><input type="text" name="text" class="input-xxlarge" value="<?php echo $form['text']; ?>" /></span>
                         </p>
 
                         <p>
@@ -173,7 +147,7 @@ jQuery(document).ready(function (){
                                         while ($field = $reqField->fetch())
                                         {
                                             ?>
-                                    <option value="<?php echo $field['id']; ?>"> <?php echo $field['name']; ?> </option>
+                                    <option value="<?php echo $field['id']; ?>" <?php if($field['id']===$form['field_type_id']){echo 'selected';} ?> > <?php echo $field['name']; ?> </option>
                                             <?php
                                         }
                                     ?>
@@ -184,20 +158,22 @@ jQuery(document).ready(function (){
                         
                         <p>
                             <label>Fields *</label>
-                            <span class="field"><input type="text" name="fields" class="input-xxlarge" required="required" /></span>
+                            <span class="field"><input type="text" name="fields" class="input-xxlarge" value="<?php echo $form['fields']; ?>" /></span>
 
                         </p>
                         
                         <p>
-                            <label>Select question(s)</label>
+                            <label>Selected question(s)</label>
                             <span id="dualselect" class="dualselect">
                             	<select class="uniformselect"  name="idQuestion[]" multiple size="12" >
                                     <?php
                                     $reqQuestion = $bdd->query("SELECT * FROM questions ");
+                                    
                                     while ($question = $reqQuestion->fetch()){
                                         $reqAnswer = $bdd->query("SELECT * FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id=".$question['id']);
+                                        $reqQuestionForm = $bdd->query("SELECT * FROM form_answers_questions WHERE form_id=".$form['id']);
                                         ?>
-                                        <option value="<?php echo $question['id']; ?>"><?php echo $question['id'].' -- '.$question['text'];  while ($answer = $reqAnswer->fetch()){ echo '  //  '.$answer['text'];}?></option>
+                                        <option value="<?php echo $question['id']; ?>" <?php while ($questionForm = $reqQuestionForm->fetch()){ if($questionForm['questions_id'] == $question['id'] ){ echo 'selected'; }} ?> > <?php echo $question['id'].' -- '.$question['text'];  while ($answer = $reqAnswer->fetch()){ echo '  //  '.$answer['text'];}?></option>
                                     <?php }?>
                                 </select>
                                 <span class="ds_arrow" style="display:none;">
@@ -212,13 +188,12 @@ jQuery(document).ready(function (){
                         
                                                                   
                         <p class="stdformbutton" style="text-align: center">
-                            <button type="submit" name="submit" id="submit" class="btn btn-primary">Create </button>
-                            <button type="reset" class="btn">Reset </button>
+                            <button type="submit" name="submit" id="submit" class="btn btn-primary">Update </button>
                         </p>
                         
                         </form>
                     </div>				
-                </div><!--contentinner--> <?php }; ?>
+                </div><!--contentinner--> <?php }} ?>
             </div><!--contentinner-->
         </div><!--maincontent-->
         

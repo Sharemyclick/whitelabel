@@ -8,7 +8,7 @@ if(isset($_POST) && !empty($_POST)){
     foreach($_POST as $indPost => $valPost){
         if(strpos($indPost,'delete') !== false)
         {
-            echo 'coucou';
+
             $bdd->exec('DELETE FROM form WHERE id='.$_POST['id']);
             $bdd->exec('DELETE FROM form_answers_questions WHERE form_id='.$_POST['id']); 
         }
