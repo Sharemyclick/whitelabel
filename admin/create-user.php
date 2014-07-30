@@ -237,9 +237,9 @@ jQuery(document).ready(function (){
                             <label>User Right *</label>
                             <span class="field">
                                 <select id="admin_rights_id" name="admin_rights_id">
-							<?php while ($donnees = $req_admin_rights->fetch())
+							<?php while ($adminRights = $req_admin_rights->fetch())
 							{?>
-							<option value="<?php echo $donnees['id']; ?>"><?php echo $donnees['descr']; ?></option>
+							<option value="<?php echo $adminRights['id']; ?>"><?php echo $adminRights['descr']; ?></option>
 							<?php }?>
                                 </select>
                             </span>
