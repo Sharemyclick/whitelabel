@@ -123,7 +123,7 @@ jQuery(document).ready(function (){
                                         while ($field = $reqField->fetch())
                                         {
                                             ?>
-                                    <option value="<?php echo $field['id']; ?>"> <?php echo $field['name']; ?> </option>
+                                    <option value="<?php echo $field['name']; ?>"> <?php echo $field['name']; ?> </option>
                                             <?php
                                         }
                                     ?>

@@ -14,19 +14,31 @@ if(isset($_POST['submit'])){
     foreach ($_POST['idQuestion'] as $selectedOption)
     echo $selectedOption."\n</br>";*/
     
-    $reqForm = $bdd->prepare('INSERT INTO form (name, h1, text, fields, field_type_id) VALUES (:name, :h1, :text, :fields, :field_type_id)');
+    $reqForm = $bdd->prepare('INSERT INTO form (name, h1, text) VALUES (:name, :h1, :text)');
 	// We execute the request by transmitting the parameter list
 	$reqForm->execute(array(
 		'name' => $_POST['name'],
 		'h1' => $_POST['h1'],
-                'text' => $_POST['text'],
-                'fields' => $_POST['fields'],
-                'field_type_id' => $_POST['field_type_id']
+                'text' => $_POST['text']
             
 		)) or die(print_r($reqForm->errorInfo())); // It tracks  the error if there is one
                  $id_form = $bdd->lastInsertId();
 	// The request processing is terminated
 	$reqForm->closeCursor();
+        
+        foreach ($_POST['idField'] as $selectedField)
+        {
+            $reqFormField = $bdd->prepare('INSERT INTO form_fields (form_id, fields_id) VALUES (:form_id, :fields_id)');
+            // We execute the request by transmitting the parameter list
+            $reqFormField->execute(array(
+		'form_id' => $id_form,
+		'fields_id' => $selectedField
+            
+		)) or die(print_r($reqFormField->errorInfo())); // It tracks  the error if there is one
+            // The request processing is terminated
+            $reqFormField->closeCursor();
+            
+        }
         
         foreach ($_POST['idQuestion'] as $selectedOption)
         {
@@ -41,23 +53,7 @@ if(isset($_POST['submit'])){
             $reqForm->closeCursor();
             
         }
-        
- 
-    	/*foreach($_POST['idQuestion'] as $idQuestionChoose){
-            $req1 = $bdd->prepare('SELECT id FROM questions_answers WHERE questions_id = :q  AND answers_id = :a');
-            $req1->execute(array('q' => $questionsid,'a' => $idQuestionChoose));
-            $res1 = $req1->fetch();
-    if(empty($res1)){
-            $req2 = $bdd->prepare('INSERT INTO questions_answers (questions_id,answers_id) VALUES(:questions_id,:answers_id)');
-            $sql = $req2->execute(array(
-                'questions_id' => $id,
-                'answers_id' => $idQuestionChoose 
-              )) or die(print_r($req2->errorInfo())); // On traque l'erreur s'il y en a une
-*/
     }
-	
-    
-
 ?>
 <!DOCTYPE html>
 <head>
@@ -130,7 +126,7 @@ jQuery(document).ready(function (){
                      if(isset($_POST['submit'])){
                          ?>   
                 
-                         <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The fom has been created </h4> </br>
+                         <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The form has been created </h4> </br>
                                     <p class="stdformbutton" style="text-align: center" >
                                       <a href="create-form.php" >
                                         <button type="button" name="create_another_form" id="create_another_form" class="btn btn-primary" >Create another form </button>
@@ -164,28 +160,26 @@ jQuery(document).ready(function (){
                         </p>
 
                         <p>
-                            <label>Field Type*</label>
-                            <span class="field">
-                                <select  name="field_type_id" id="field_type_id" class="status" >
-                                    <option value=""></option>
+                            <label>Select field(s)</label>
+                            <span id="dualselect" class="dualselect">
+                            	<select class="uniformselect"  name="idField[]" multiple size="12" >
+                                    <?php
+                                    $reqField = $bdd->query("SELECT * FROM fields ");
+                                    while ($field = $reqField->fetch())
+                                    {
+                                        ?>
+                                        <option value="<?php echo $field['id']; ?>" > <?php echo $field['id'].' -- '.$field['label'].'  -- Type:  '.$field['type'];?></option>
                                     <?php 
-                                        $reqField = $bdd->query("SELECT * FROM field_type");
-                                        while ($field = $reqField->fetch())
-                                        {
-                                            ?>
-                                    <option value="<?php echo $field['id']; ?>"> <?php echo $field['name']; ?> </option>
-                                            <?php
-                                        }
-                                    ?>
-                                    
+                                    }?>
+                                </select>
+                                <span class="ds_arrow" style="display:none;">
+                                	<button class="btn ds_prev"><i class="icon-chevron-left"></i></button><br />
+                                    <button class="btn ds_next"><i class="icon-chevron-right"></i></button>
+                                </span>
+                                <select name="select4[]" multiple style="display:none;" size="10">
+                                    <option value=""></option>
                                 </select>
                             </span>
-                        </p>
-                        
-                        <p>
-                            <label>Fields *</label>
-                            <span class="field"><input type="text" name="fields" class="input-xxlarge" required="required" /></span>
-
                         </p>
                         
                         <p>

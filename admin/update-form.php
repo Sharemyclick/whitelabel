@@ -77,7 +77,7 @@ jQuery(document).ready(function (){
                          
 //-----------------------------------------------------------------------------------// 
         //UPDATE FORM
-        $bdd->exec(' UPDATE form SET name="'.$_POST['name'].'" , h1="'.$_POST['h1'].'", text="'.$_POST['text'].'", fields="'.$_POST['fields'].'", field_type_id="'.$_POST['field_type_id'].'"  WHERE id='.$id_form);
+        $bdd->exec(' UPDATE form SET name="'.$_POST['name'].'" , h1="'.$_POST['h1'].'", text="'.$_POST['text'].'"  WHERE id='.$id_form);
 //---------------------------------------------------------------------------------------//
         //DELETE AND INSERT form_answers_questions
         $bdd->exec('DELETE FROM form_answers_questions WHERE form_id='.$id_form); 
@@ -93,6 +93,25 @@ jQuery(document).ready(function (){
 		)) or die(print_r($reqForm->errorInfo())); // It tracks  the error if there is one
             // The request processing is terminated
             $reqForm->closeCursor();
+            
+        }
+        
+//---------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------//
+        //DELETE AND INSERT form_fields
+        $bdd->exec('DELETE FROM form_fields WHERE form_id='.$id_form); 
+        
+        foreach ($_POST['idField'] as $selectedField)
+        {
+            $reqField = $bdd->prepare('INSERT INTO form_fields (form_id, fields_id) VALUES (:form_id, :fields_id)');
+            // We execute the request by transmitting the parameter list
+            $reqField->execute(array(
+		'form_id' => $id_form,
+		'fields_id' => $selectedField
+            
+		)) or die(print_r($reqField->errorInfo())); // It tracks  the error if there is one
+            // The request processing is terminated
+            $reqField->closeCursor();
             
         }
         
@@ -137,28 +156,30 @@ jQuery(document).ready(function (){
                             <span class="field"><input type="text" name="text" class="input-xxlarge" value="<?php echo $form['text']; ?>" /></span>
                         </p>
 
-                        <p>
-                            <label>Field Type*</label>
-                            <span class="field">
-                                <select  name="field_type_id" id="field_type_id" class="status" >
-                                    <option value=""></option>
-                                    <?php 
-                                        $reqField = $bdd->query("SELECT * FROM field_type");
-                                        while ($field = $reqField->fetch())
-                                        {
-                                            ?>
-                                    <option value="<?php echo $field['id']; ?>" <?php if($field['id']===$form['field_type_id']){echo 'selected';} ?> > <?php echo $field['name']; ?> </option>
-                                            <?php
-                                        }
-                                    ?>
-                                    
-                                </select>
-                            </span>
-                        </p>
+                        
                         
                         <p>
                             <label>Fields *</label>
-                            <span class="field"><input type="text" name="fields" class="input-xxlarge" value="<?php echo $form['fields']; ?>" /></span>
+                            <span id="dualselect" class="dualselect">
+                            	<select class="uniformselect"  name="idField[]" multiple size="12" >
+                                    <?php
+                                    $reqFields = $bdd->query("SELECT * FROM fields ");
+                                    
+                                    while ($field = $reqFields->fetch()){
+                                        
+                                        $reqFieldForm = $bdd->query("SELECT * FROM form_fields WHERE form_id=".$form['id']);
+                                        ?>
+                                        <option value="<?php echo $field['id']; ?>" <?php while ($FieldForm = $reqFieldForm->fetch()){ if($FieldForm['fields_id'] == $field['id'] ){ echo 'selected'; }} ?> > <?php echo $field['id'].' -- '.$field['label'].' --  Type: '.$field['type']; ?></option>
+                                    <?php }?>
+                                </select>
+                                <span class="ds_arrow" style="display:none;">
+                                	<button class="btn ds_prev"><i class="icon-chevron-left"></i></button><br />
+                                    <button class="btn ds_next"><i class="icon-chevron-right"></i></button>
+                                </span>
+                                <select name="select4[]" multiple style="display:none;" size="10">
+                                    <option value=""></option>
+                                </select>
+                            </span>
 
                         </p>
                         

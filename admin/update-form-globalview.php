@@ -11,6 +11,8 @@ if(isset($_POST) && !empty($_POST)){
 
             $bdd->exec('DELETE FROM form WHERE id='.$_POST['id']);
             $bdd->exec('DELETE FROM form_answers_questions WHERE form_id='.$_POST['id']); 
+            $bdd->exec('DELETE FROM form_fields WHERE form_id='.$_POST['id']); 
+
         }
     }
 }
@@ -98,7 +100,6 @@ jQuery(document).ready(function (){
                         <col class="con0" />
                         <col class="con1" />
                         <col class="con0" />
-                        <col class="con1" />
                     </colgroup>
  
                     <thead>
@@ -107,7 +108,6 @@ jQuery(document).ready(function (){
                             <th class="centeralign">h1</th>
                             <th class="centeralign">Text</th>
                             <th class="centeralign">Fields</th>
-                            <th class="centeralign">Fields type</th>
                             <th class="centeralign">Questions/Answers</th>
                             <th class="centeralign">Update</th>
                             <th class="centeralign">Delete</th>
@@ -135,38 +135,57 @@ jQuery(document).ready(function (){
                             </td>
                             
                             <td>
-                                <p align="center"> <?php echo $form['fields'] ?> </p>
-                            </td>
-                            
-                            <td>
-                                <p align="center"> 
-                                    <?php
-                                    if($form['field_type_id'] === '1') 
-                                    {
-                                        echo 'type: input';
-                                    }
-                                    elseif ($form['field_type_id'] === '2') 
-                                    {
-                                        echo 'type: select';
-                                    } 
-                                    elseif ($form['field_type_id'] === '3') 
-                                    {
-                                        echo 'type: textarea';
-                                    }
-                                    elseif ($form['field_type_id'] === '4') 
-                                    {
-                                        echo 'type: checkbox';
-                                    }
-                                    elseif ($form['field_type_id'] === '5') 
-                                    {
-                                        echo 'type: radio';
-                                    }
-                                    elseif ($form['field_type_id'] === '6') 
-                                    {
-                                        echo 'type: datepicker';
-                                    }
-                                    ?>
-                                </p>
+                                
+                                 <?php
+                                $reqField = $bdd->query('SELECT * FROM fields LEFT JOIN form_fields ON form_fields.fields_id=fields.id WHERE form_fields.form_id='.$form['id']) or die(print_r($bdd->errorInfo()));
+                                while ($field = $reqField->fetch())
+                                {
+                                  
+                                    
+                               echo '<span><i class="iconfa-circle-arrow-right"></i>        '.$field['label'].'</span>';
+                               echo '<span></br>';
+                                    //if field type is input
+                                if($field['type'] === 'Input')
+                                {
+                                    //echo 'Input text'; ?> 
+                                <input type="text" >
+                                  <?php 
+                               
+                                }
+                                //if field type is select
+                                if($field['type'] === 'Select')
+                                {?>
+                              
+                                    <select name="" id="answers" class="status"> 
+                                       <option value=""></option>
+                                    
+                                    ?> </select> <?php
+                                    
+                                }
+                                //if field type is radio
+                                 if($field['type'] === 'Radio')
+                                {?>
+                                    
+                                        <INPUT type= "radio" name="radio" value=""></i></br>
+                                 <?php   
+                                }
+                                //if field type is checkbox
+                                 if($field['type'] === 'Checkbox')
+                                {?>
+                                        <INPUT type= "checkbox" name="checkbox" value=""></i></br>
+                                <?php
+                                }
+                                //if field type is textarea
+                                 if($field['type'] === 'Textarea')
+                                {
+                                     
+                                       echo ' <textarea rows="1" cols="4"></textarea>        ';
+                                }
+                                echo '</span></br></br>';
+                                }
+                                    
+                                ?>
+                                
                             </td>
                             
                             <td class="centeralign" style="text-align: left">
