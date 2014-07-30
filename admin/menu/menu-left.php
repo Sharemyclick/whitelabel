@@ -113,7 +113,7 @@
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-form' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="update-form.php">Modify form</a></li>
+                            <li><a href="update-form-globalview.php">Modify form</a></li>
                             <?php }?>
                         </ul>
                     </li>  
