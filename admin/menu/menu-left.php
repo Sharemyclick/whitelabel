@@ -102,6 +102,26 @@
                         </ul>
                     </li>   
                     
+                    <li id="li-quote" class="dropdown"><a href=""><span class="icon-home"></span> DOMAIN</a>
+                        <ul>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-domain' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="view-domain.php">View domain</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-domain' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="create-domain.php">Create domain</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-domain' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="update-domain-globalview.php">Modify domain</a></li>
+                            <?php }?>
+                        </ul>
+                    </li>   
+                    
                     
                     <li id="li-form" class="dropdown"><a href=""><span class="icon-folder-close"></span> FORM</a>
                         <ul>

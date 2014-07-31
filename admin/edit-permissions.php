@@ -254,6 +254,37 @@ if(isset($_POST['submitChanges'])){
                             <td class="centeralign"><input type="checkbox" name="update-quote|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-quote' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                         </tr>
                         
+                        <td colspan="9" class="leftalign"><strong>DOMAIN PERMISSIONS</strong></td>
+                        </tr>	
+                        
+                        <tr>
+                            <td class="centeralign">View domain</td>
+                            <td class="centeralign"><input type="checkbox" name="view-domain|1" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-domain' AND admin_rights_id = 1");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="view-domain|2" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-domain' AND admin_rights_id = 2");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="view-domain|3" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-domain' AND admin_rights_id = 3");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="view-domain|4" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-domain' AND admin_rights_id = 4");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="view-domain|5" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-domain' AND admin_rights_id = 5");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="view-domain|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-domain' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                        </tr>
+                        <tr>
+                            <td class="centeralign">Create domain</td>
+                            <td class="centeralign"><input type="checkbox" name="create-domain|1" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-domain' AND admin_rights_id = 1");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="create-domain|2" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-domain' AND admin_rights_id = 2");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="create-domain|3" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-domain' AND admin_rights_id = 3");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="create-domain|4" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-domain' AND admin_rights_id = 4");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="create-domain|5" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-domain' AND admin_rights_id = 5");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="create-domain|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-domain' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                        </tr>
+                        <tr>
+                            <td class="centeralign">Update domain</td>
+                            <td class="centeralign"><input type="checkbox" name="update-domain|1" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-domain' AND admin_rights_id = 1");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="update-domain|2" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-domain' AND admin_rights_id = 2");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="update-domain|3" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-domain' AND admin_rights_id = 3");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="update-domain|4" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-domain' AND admin_rights_id = 4");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="update-domain|5" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-domain' AND admin_rights_id = 5");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="update-domain|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-domain' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                        </tr>
+                        
                         <tr>
                         <td colspan="9" class="leftalign"><strong>FORM PERMISSIONS</strong></td>
                         </tr>	
