@@ -66,6 +66,9 @@ if(isset($_POST['submit'])){
 		'admin_rights_id' =>  $_POST['admin_rights_id']
                 
 		)) or die(print_r($req->errorInfo())); // Oit tracks error if there is one
+                $id_admin = $bdd->lastInsertId();
+                // The request processing is terminated
+                $req->closeCursor();
 }}
 ?>
 <!DOCTYPE html>
@@ -147,8 +150,16 @@ jQuery(document).ready(function (){
                                      <a href="view-users.php" >
                                         <button type="button" name="view_all_user" id="view_all_advertiser" class="btn btn-primary" >View all advertisers </button>
                                       </a>
-                                </p>           
-                <?php ;}
+                                        
+                <?php if($_POST['admin_rights_id']=== '4'){
+                    
+                                       ?>
+                                        <a href="assign-affiliate-pid.php?id=<?php echo $id_admin;?>" >
+                                        <button type="button" name="assign_affiliate_pid" id="assign_affiliate_pid" class="btn btn-primary" >Assign Affiliate PID </button>
+                                      </a>
+                                </p>   
+                
+                <?php };}
                 Else {?>
 			<div class="widgetcontent">
 			
