@@ -5,52 +5,55 @@ include('conf.php');
 
 
 if(isset($_POST['submit'])){
-    
-    /*echo $_POST['name'].'</br>';
-    echo $_POST['h1'].'</br>';
-    echo $_POST['text'].'</br>';
-    echo $_POST['field_type'].'</br>';
-    echo $_POST['field'].'</br>';
-    foreach ($_POST['idQuestion'] as $selectedOption)
-    echo $selectedOption."\n</br>";*/
-    
-    $reqForm = $bdd->prepare('INSERT INTO form (name, h1, text) VALUES (:name, :h1, :text)');
+
+    $reqQuote = $bdd->prepare('INSERT INTO devis (name) VALUES (:name)');
 	// We execute the request by transmitting the parameter list
-	$reqForm->execute(array(
-		'name' => $_POST['name'],
-		'h1' => $_POST['h1'],
-                'text' => $_POST['text']
+	$reqQuote->execute(array(
+		'name' => $_POST['name']
             
-		)) or die(print_r($reqForm->errorInfo())); // It tracks  the error if there is one
-                 $id_form = $bdd->lastInsertId();
+		)) or die(print_r($reqQuote->errorInfo())); // It tracks  the error if there is one
+                 $id_quote = $bdd->lastInsertId();
 	// The request processing is terminated
-	$reqForm->closeCursor();
+	$reqQuote->closeCursor();
         
-        foreach ($_POST['idField'] as $selectedField)
+        foreach ($_POST['idForm'] as $selectedForm)
         {
-            $reqFormField = $bdd->prepare('INSERT INTO form_fields (form_id, fields_id) VALUES (:form_id, :fields_id)');
+            $reqFormQuote = $bdd->prepare('INSERT INTO form_devis (form_id, devis_id) VALUES (:form_id, :devis_id)');
             // We execute the request by transmitting the parameter list
-            $reqFormField->execute(array(
-		'form_id' => $id_form,
-		'fields_id' => $selectedField
+            $reqFormQuote->execute(array(
+		'form_id' => $selectedForm,
+		'devis_id' => $id_quote
             
-		)) or die(print_r($reqFormField->errorInfo())); // It tracks  the error if there is one
+		)) or die(print_r($reqFormQuote->errorInfo())); // It tracks  the error if there is one
             // The request processing is terminated
-            $reqFormField->closeCursor();
+            $reqFormQuote->closeCursor();
             
         }
         
-        foreach ($_POST['idQuestion'] as $selectedOption)
+        foreach ($_POST['idDomain'] as $selectedDomain)
         {
-            $reqForm = $bdd->prepare('INSERT INTO form_answers_questions (form_id, questions_id) VALUES (:form_id, :questions_id)');
+            $reqDomain = $bdd->prepare('INSERT INTO domain_devis (devis_id, domain_id) VALUES (:devis_id, :domain_id)');
             // We execute the request by transmitting the parameter list
-            $reqForm->execute(array(
-		'form_id' => $id_form,
-		'questions_id' => $selectedOption
+            $reqDomain->execute(array(
+		'devis_id' => $id_quote,
+		'domain_id' => $selectedDomain
             
-		)) or die(print_r($reqForm->errorInfo())); // It tracks  the error if there is one
+		)) or die(print_r($reqDomain->errorInfo())); // It tracks  the error if there is one
             // The request processing is terminated
-            $reqForm->closeCursor();
+            $reqDomain->closeCursor();
+            
+        }
+        foreach ($_POST['idAdmin'] as $selectedAdmin)
+        {
+            $reqAdmin = $bdd->prepare('INSERT INTO devis_admin (devis_id, admin_id) VALUES (:devis_id, :admin_id)');
+            // We execute the request by transmitting the parameter list
+            $reqAdmin->execute(array(
+		'devis_id' => $id_quote,
+		'admin_id' => $selectedAdmin
+            
+		)) or die(print_r($reqAdmin->errorInfo())); // It tracks  the error if there is one
+            // The request processing is terminated
+            $reqAdmin->closeCursor();
             
         }
     }
@@ -126,49 +129,39 @@ jQuery(document).ready(function (){
                      if(isset($_POST['submit'])){
                          ?>   
                 
-                         <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The form has been created </h4> </br>
+                         <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The quote has been created </h4> </br>
                                     <p class="stdformbutton" style="text-align: center" >
-                                      <a href="create-form.php" >
-                                        <button type="button" name="create_another_form" id="create_another_form" class="btn btn-primary" >Create another form </button>
+                                      <a href="create-quote.php" >
+                                        <button type="button" name="create_another_quote" id="create_another_quote" class="btn btn-primary" >Create another quote </button>
                                       </a>
-                                     <a href="view-form.php" >
-                                        <button type="button" name="view_all_form" id="view_all_form" class="btn btn-primary" >View all forms </button>
+                                     <a href="view-quote.php" >
+                                        <button type="button" name="view_all_quote" id="view_all_quote" class="btn btn-primary" >View all quote </button>
                                       </a>
                                 </p>           
                 <?php ;}
                 Else {?>
 			<div class="widgetcontent">
 			
-            	<h4 class="widgettitle nomargin shadowed">Form information</h4>
+            	<h4 class="widgettitle nomargin shadowed">Quote information</h4>
 					
                 <div class="widgetcontent bordered shadowed nopadding">
                     <form name="form_user" class="stdform stdform2" method="post" action="" enctype="multipart/form-data">
                         
                         <p>
-                            <label>Form name *</label>
+                            <label>Quote name *</label>
                             <span class="field"><input type="text" name="name" class="input-xxlarge" required="required" /></span>
                         </p>
                         
                         <p>
-                            <label>h1 - Text description *</label>
-                            <span class="field"><input type="text" name="h1" class="input-xxlarge" required="required" /></span>
-                        </p>
-                        
-                        <p>
-                            <label>Text *</label>
-                            <span class="field"><input type="text" name="text" class="input-xxlarge" required="required" /></span>
-                        </p>
-
-                        <p>
-                            <label>Select field(s)</label>
+                            <label>Form name *</label>
                             <span id="dualselect" class="dualselect">
-                            	<select class="uniformselect"  name="idField[]" multiple size="12" >
+                            	<select class="uniformselect"  name="idForm[]" multiple size="12" >
                                     <?php
-                                    $reqField = $bdd->query("SELECT * FROM fields ");
-                                    while ($field = $reqField->fetch())
+                                    $reqForm = $bdd->query("SELECT * FROM form ");
+                                    while ($form = $reqForm->fetch())
                                     {
                                         ?>
-                                        <option value="<?php echo $field['id']; ?>" > <?php echo $field['id'].' -- '.$field['label'].'  -- Type:  '.$field['type'];?></option>
+                                        <option value="<?php echo $form['id']; ?>" > <?php echo $form['name'];?></option>
                                     <?php 
                                     }?>
                                 </select>
@@ -183,16 +176,17 @@ jQuery(document).ready(function (){
                         </p>
                         
                         <p>
-                            <label>Select question(s)</label>
+                            <label>Company name *</label>
                             <span id="dualselect" class="dualselect">
-                            	<select class="uniformselect"  name="idQuestion[]" multiple size="12" >
+                            	<select class="uniformselect"  name="idAdmin[]" multiple size="12" >
                                     <?php
-                                    $reqQuestion = $bdd->query("SELECT * FROM questions ");
-                                    while ($question = $reqQuestion->fetch()){
-                                        $reqAnswer = $bdd->query("SELECT * FROM answers LEFT JOIN answers_questions ON answers_questions.answers_id=answers.id WHERE answers_questions.questions_id=".$question['id']);
+                                    $reqAdmin = $bdd->query("SELECT * FROM admin ");
+                                    while ($admin = $reqAdmin->fetch())
+                                    {
                                         ?>
-                                        <option value="<?php echo $question['id']; ?>"><?php echo $question['id'].' -- '.$question['text'];  while ($answer = $reqAnswer->fetch()){ echo '  //  '.$answer['text'];}?></option>
-                                    <?php }?>
+                                        <option value="<?php echo $admin['id']; ?>" > <?php echo $admin['company'];?></option>
+                                    <?php 
+                                    }?>
                                 </select>
                                 <span class="ds_arrow" style="display:none;">
                                 	<button class="btn ds_prev"><i class="icon-chevron-left"></i></button><br />
@@ -204,7 +198,29 @@ jQuery(document).ready(function (){
                             </span>
                         </p>
                         
-                                                                  
+                        <p>
+                            <label>Domain name *</label>
+                            <span id="dualselect" class="dualselect">
+                            	<select class="uniformselect"  name="idDomain[]" multiple size="12" >
+                                    <?php
+                                    $reqDomain = $bdd->query("SELECT * FROM domain ");
+                                    while ($domain = $reqDomain->fetch())
+                                    {
+                                        ?>
+                                        <option value="<?php echo $domain['id']; ?>" > <?php echo $domain['name'];?></option>
+                                    <?php 
+                                    }?>
+                                </select>
+                                <span class="ds_arrow" style="display:none;">
+                                	<button class="btn ds_prev"><i class="icon-chevron-left"></i></button><br />
+                                    <button class="btn ds_next"><i class="icon-chevron-right"></i></button>
+                                </span>
+                                <select name="select4[]" multiple style="display:none;" size="10">
+                                    <option value=""></option>
+                                </select>
+                            </span>
+                        </p>
+
                         <p class="stdformbutton" style="text-align: center">
                             <button type="submit" name="submit" id="submit" class="btn btn-primary">Create </button>
                             <button type="reset" class="btn">Reset </button>
