@@ -74,12 +74,73 @@ jQuery(document).ready(function (){
                 
                 <?php
                      if(isset($_POST['submit'])){
+                             
+
+//-----------------------------------------------------------------------------------// 
+        //UPDATE DEVIS table
+        $bdd->exec(' UPDATE devis SET name="'.$_POST['name'].'" WHERE id='.$id_quote);
+
+//---------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------//
+        //DELETE AND INSERT form_devis
+        
+        $bdd->exec('DELETE FROM form_devis WHERE devis_id='.$id_quote); 
+
+         foreach ($_POST['idForm'] as $selectedForm)
+        {
+            $reqFormQuote = $bdd->prepare('INSERT INTO form_devis (form_id, devis_id) VALUES (:form_id, :devis_id)');
+            // We execute the request by transmitting the parameter list
+            $reqFormQuote->execute(array(
+		'form_id' => $selectedForm,
+		'devis_id' => $id_quote
+            
+		)) or die(print_r($reqFormQuote->errorInfo())); // It tracks  the error if there is one
+            // The request processing is terminated
+            $reqFormQuote->closeCursor();
+        }
+        
+        //DELETE AND INSERT domain_devis
+        $bdd->exec('DELETE FROM domain_devis WHERE devis_id='.$id_quote); 
+
+        foreach ($_POST['idDomain'] as $selectedDomain)
+        {
+            $reqDomain = $bdd->prepare('INSERT INTO domain_devis (devis_id, domain_id) VALUES (:devis_id, :domain_id)');
+            // We execute the request by transmitting the parameter list
+            $reqDomain->execute(array(
+		'devis_id' => $id_quote,
+		'domain_id' => $selectedDomain
+            
+		)) or die(print_r($reqDomain->errorInfo())); // It tracks  the error if there is one
+            // The request processing is terminated
+            $reqDomain->closeCursor();
+        }
+        //DELETE AND INSERT devis_admin
+        $bdd->exec('DELETE FROM devis_admin WHERE devis_id='.$id_quote); 
+        
+        foreach ($_POST['idAdmin'] as $selectedAdmin)
+        {
+            $reqAdmin = $bdd->prepare('INSERT INTO devis_admin (devis_id, admin_id) VALUES (:devis_id, :admin_id)');
+            // We execute the request by transmitting the parameter list
+            $reqAdmin->execute(array(
+		'devis_id' => $id_quote,
+		'admin_id' => $selectedAdmin
+            
+		)) or die(print_r($reqAdmin->errorInfo())); // It tracks  the error if there is one
+            // The request processing is terminated
+            $reqAdmin->closeCursor();
+            
+        }
+        
+//---------------------------------------------------------------------------------------//
+                             
+                             
+                             
                          ?>   
                 
-                         <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The quote has been created </h4> </br>
+                         <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The quote has been updated </h4> </br>
                                     <p class="stdformbutton" style="text-align: center" >
-                                      <a href="create-quote.php" >
-                                        <button type="button" name="create_another_quote" id="create_another_quote" class="btn btn-primary" >Create another quote </button>
+                                        <a href="update-domain-globalview.php" >
+                                        <button type="button" name="update_another_quote" id="update_another_quote" class="btn btn-primary" >Update another quote </button>
                                       </a>
                                      <a href="view-quote.php" >
                                         <button type="button" name="view_all_quote" id="view_all_quote" class="btn btn-primary" >View all quote </button>
@@ -174,8 +235,7 @@ jQuery(document).ready(function (){
                         </p>
 
                         <p class="stdformbutton" style="text-align: center">
-                            <button type="submit" name="submit" id="submit" class="btn btn-primary">Create </button>
-                            <button type="reset" class="btn">Reset </button>
+                            <button type="submit" name="submit" id="submit" class="btn btn-primary">Update </button>
                         </p>
                         
                         </form>
