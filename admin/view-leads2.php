@@ -82,65 +82,65 @@ jQuery(document).ready(function (){
                 
 			<h4 class="widgettitle">List of all leads in the DB</h4>		
 				<table class="table table-bordered" id="leads">
-					 <colgroup>
-                        <col class="con0" style="align: center; width: 4%" />
+                        <colgroup>
+                        
+                        <col class="con0" />
+                        <col class="con1" />
+                        <col class="con0" />
                         <col class="con1" />
                         <col class="con0" />
                         <col class="con1" />
                         <col class="con0" />
                         <col class="con1" />
-						<col class="con0" />
+                        <col class="con0" />
                         <col class="con1" />
-						<col class="con0" />
+                        <col class="con0" />
                         <col class="con1" />
-						<col class="con0" />
-                        <col class="con1" />
-						<col class="con0" />
+                        <col class="con0" />
                         <col class="con1" />
                     </colgroup>
                     <thead>
                         <tr>
-							<th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-							<th>Id</th>
-							<th>Firstname</th>
-							<th>Lastname</th>
-							<th>Email</th>
-							<th>Dob</th>
-							<th>Address</th>
-							<th>Postal Code</th>
-							<th>City</th>
-							<th>Country</th>
-							<th>Phone</th>
-							<th>Pid</th>
-							<th>Register</th>
-							<th>JC</th>
-						</tr>
+                            <th>Id</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                            <th>PID ID</th>
+                            <th>Devis ID</th>
+                            <th>Form ID</th>
+                            <th>Address</th>
+                            <th>Postal Code</th>
+                            <th>City</th>
+                            <th>Country</th>
+                            <th>Phone</th>
+                            <th>DOB</th>
+                            <th>regdate</th>
+							
+                        </tr>
                     </thead>
                     
 					<tbody>
 						<?php
 					// On rÃ©cupÃ¨re tout le contenu de la table 'client'
-					$reponse = $bdd->query('SELECT * FROM user') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
+					$reqLeads = $bdd->query('SELECT * FROM leads LEFT JOIN leads_pid ON leads.id=leads_pid.leads_id') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
 					// On affiche chaque entrÃ©e une Ã  une et celÃ  tant qu'il y en a
-					while ($donnees = $reponse->fetch())
-						{
-                        echo '<tr>';
-							echo '<td class="centeralign">'.'<input type="checkbox" />'.'</td>';
-                            echo '<td class="centeralign">'.$donnees['id'].'</td>';
-                            echo '<td class="centeralign">'.$donnees['firstname'].'</td>';
-                            echo '<td class="centeralign">'.$donnees['lastname'].'</td>';
-							echo '<td class="centeralign">'.$donnees['email'].'</td>';
-							echo '<td class="centeralign">'.$donnees['dob'].'</td>';
-							echo '<td class="centeralign">'.$donnees['address'].'</td>';
-							echo '<td class="centeralign">'.$donnees['postal_code'].'</td>';
-							echo '<td class="centeralign">'.$donnees['city'].'</td>';
-							echo '<td class="centeralign">'.$donnees['country'].'</td>';
-							echo '<td class="centeralign">'.$donnees['telephone'].'</td>';
-							echo '<td class="centeralign">'.$donnees['pid_id'].'</td>';
-							echo '<td class="centeralign">'.$donnees['regdate'].'</td>';
-							echo '<td class="centeralign">'.$donnees['jeux_concours_id'].'</td>';
-                        echo '</tr>';
-						}
+					while ($leads = $reqLeads->fetch())
+						{?>
+                                            
+                       <tr>
+                            <td class="centeralign"></td>
+                                    <td class="centeralign"></td>                         
+                                    <td class="centeralign"></td>							
+                                    <td class="centeralign"></td>
+                                    <td class="centeralign"></td>
+                                    <td class="centeralign"></td>
+                                    <td class="centeralign"></td>
+                                    <td class="centeralign"></td>
+                                    <td class="centeralign"></td>
+                                    <td class="centeralign"></td>
+                                    <td class="centeralign"></td>							echo '<td class="centeralign">'.$donnees['jeux_concours_id'].'</td>';
+                        </tr>
+						<?php }
 					?>
                     </tbody>
 				</table>

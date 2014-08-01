@@ -180,61 +180,40 @@ include('conf.php');
 			<?php if(isset($_POST['filterCampaigns'])) { ?>
             <table class="table table-bordered" id="list">
 					<colgroup>
+                        
                         <col class="con0" />
                         <col class="con1" />
                         <col class="con0" />
                         <col class="con1" />
                         <col class="con0" />
-                        <!--<col class="con1" />-->
-						<col class="con0" />
                         <col class="con1" />
                         <col class="con0" />
                         <col class="con1" />
                         <col class="con0" />
                         <col class="con1" />
-						<col class="con0" />
-                        <col class="con1" />
                         <col class="con0" />
                         <col class="con1" />
                         <col class="con0" />
                         <col class="con1" />
-						<col class="con0" />
-                        <col class="con1" />
-                        <col class="con0" />
-                        <col class="con1" />
-						<col class="con0" />
-						<col class="con1" />
-                        <!--<col class="con0" />-->
                     </colgroup>
-					<thead>
+                    <thead>
                         <tr>
-							<th class="centeralign">Campaign</th>
-							<th class="centeralign">Advertiser</th>
-							<th class="centeralign">Payout Advertiser</th>
-							<th class="centeralign">Payout SMC</th>
-							<th class="centeralign">Type Payout</th>
-							<!--<th class="centeralign">Time</th>-->
-							<th class="centeralign">Country</th>
-							<th class="centeralign">Allowed</th>
-							<th class="centeralign">Conversion</th>
-							<th class="centeralign">Device</th>
-							<th class="centeralign">Thumbnail</th>
-							<!--<th class="centeralign">Clicks</th>
-							<th class="centeralign">Clicks %</th>
-							<th class="centeralign">Bounced</th>
-							<th class="centeralign">Bounced %</th>
-							<th class="centeralign">Compl.</th>
-							<th class="centeralign">Compl. %</th>
-							<th class="centeralign">Unsubs.</th>
-							<th class="centeralign">Unsubs. %</th>
-							<th class="centeralign">Leads</th>
-							<th class="centeralign">CR %</th>
-							<th class="centeralign">Revenue</th>
-							<th class="centeralign">Ecpm</th>
-							<th class="centeralign">Ecpc</th>
-							<th class="centeralign">Database</th> 
-							<th class="centeralign">Approval</th>-->
-						</tr>
+                            <th>Id</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                            <th>PID ID</th>
+                            <th>Devis ID</th>
+                            <th>Form ID</th>
+                            <th>Address</th>
+                            <th>Postal Code</th>
+                            <th>City</th>
+                            <th>Country</th>
+                            <th>Phone</th>
+                            <th>DOB</th>
+                            <th>regdate</th>
+							
+                        </tr>
                     </thead>
                     
 					<tbody style="font-size:10px;">

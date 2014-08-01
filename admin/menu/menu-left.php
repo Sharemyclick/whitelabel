@@ -186,7 +186,7 @@
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-theme' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="view-theme.php">View themes</a></li>
+                            <li><a href="view-theme-globalview.php">View themes</a></li>
                             <?php }?>
                              <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-theme' and admin_rights_id = ".$_SESSION['right']);
