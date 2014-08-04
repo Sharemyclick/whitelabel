@@ -196,7 +196,7 @@
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-theme' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="update-theme.php">Modify theme</a></li>
+                            <li><a href="update-theme-globalview.php">Modify theme</a></li>
                             <?php }?>
                         </ul>
                     </li>  
