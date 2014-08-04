@@ -210,14 +210,14 @@ jQuery(document).ready(function (){
                                             if ($donnees['status']=='active')
                                             {
                                                 ?><input type="button" class="btn btn-success" value="Status : Active">
-                                                    &nbsp;  <input  type="submit" class="btn" name="deactivate" value='Deactivate your account'> 
+                                                    &nbsp;  <input  type="submit" class="btn" name="deactivate" value='Deactivate the account'> 
                                                 <?php ;
                                             
                                             }
                                             if  ($donnees['status']=='non-active')
                                             {
                                                 ?><input type="button" class="btn btn-danger" value="Status : Non-active"  > 
-                                                &nbsp;  <input  type="submit" class="btn" name="activate" value='Activate your account'>
+                                                &nbsp;  <input  type="submit" class="btn" name="activate" value='Activate the account'>
                                                 <?php ;
                                             }
                                             

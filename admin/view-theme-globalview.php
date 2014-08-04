@@ -63,7 +63,7 @@ jQuery(document).ready(function (){
           
         </div><!--breadcrumbwidget-->
       <div class="pagetitle">
-        	<h1>View Forms</h1> <span><strong><?php echo ucfirst($_SESSION['login']); ?></strong> , please see all the forms. </span>
+        	<h1>View Themes</h1> <span><strong><?php echo ucfirst($_SESSION['login']); ?></strong> , please see all the forms. </span>
         </div><!--pagetitle-->
         
         <div class="maincontent">
@@ -104,15 +104,34 @@ jQuery(document).ready(function (){
                             </td>
                             
                             <td>
-                                <p align="center"> <?php echo $theme['image'] ?> </p>
+                                <p align="center"> <img  src="<?php echo 'http://localhost/white_label/admin/img/themes/'.$theme['image'] ?>" height="92" width="52" >  </p>
                             </td>
                             
                             <td>
-                                <p align="center"> <?php echo $theme['picto'] ?> </p>
+                                <p align="center"> <img  src="<?php echo 'http://localhost/white_label/admin/img/themes/'.$theme['picto'] ?>" height="92" width="52" >   </p>
                             </td>
                             
                             <td>
-                                 <p align="center"> <?php echo $theme['status'] ?> </p>
+                                 <p align="center"> 
+                                 
+                                     <?php 
+                                            if ($theme['status']=='active')
+                                            {
+                                                ?><input type="button" class="btn btn-success" value="Active">
+                                                   
+                                                <?php ;
+                                            
+                                            }
+                                            if  ($theme['status']=='non-active')
+                                            {
+                                                ?><input type="button" class="btn btn-danger" value="Non-active"  > 
+                                               
+                                                <?php ;
+                                            }
+                                            
+                                        ?>
+                                 
+                                 </p>
                                
                             </td>
                             

@@ -63,7 +63,7 @@ jQuery(document).ready(function (){
             
         </div><!--breadcrumbwidget-->
         <div class="pagetitle">
-        	<h1>Create theme</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new user.</span>
+        	<h1>View theme informations </h1> <span><?php echo $_SESSION['login']; ?> , Please see theme's information .</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">
@@ -76,7 +76,7 @@ jQuery(document).ready(function (){
             	<h4 class="widgettitle nomargin shadowed">Theme</h4>
 					
                 <div class="widgetcontent bordered shadowed nopadding">
-                    <form name="form_user" class="stdform stdform2" method="post" action="" enctype="multipart/form-data">
+                    <form name="form_user" class="stdform stdform2" method="post" action="update-theme.php?id=<?php echo $id_theme; ?>" enctype="multipart/form-data">
                         <?php 
                         $reqTheme = $bdd->query('SELECT * FROM themes LEFT JOIN template_themes ON template_themes.themes_id=themes.id WHERE themes.id='.$id_theme) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
 					while ($theme = $reqTheme->fetch())
@@ -85,30 +85,29 @@ jQuery(document).ready(function (){
                         <p>
                             <label>Name *</label>
                             <span class="field">
-                                <input type="text" name="name" class="input-xxlarge"  readonly="readonly" />
+                                <input type="text" name="name" class="input-xxlarge" value="<?php echo $theme['name'] ?>" readonly="readonly" />
                             </span>
                         </p>
                         
                         <p>
                             <label>Image *</label>
-                            <span class="field">
-                                <input type="text" name="image" class="input-xxlarge" readonly="readonly" />
+                            <span class="field" style="text-align: center">
+                                <img  src="<?php echo 'http://localhost/white_label/admin/img/themes/'.$theme['image'] ?>" height="184" width="104" >
                             </span>
                         </p>
                         
                         <p>
                             <label>Picto *</label>
                             <span class="field">
-                                <input type="text" name="picto" class="input-xxlarge" readonly="readonly"/>
-                            </span>
+                                <img  src="<?php echo 'http://localhost/white_label/admin/img/themes/'.$theme['picto'] ?>" height="184" width="104" >                            </span>
                         </p>
                         
                         <p>
                             <label>Status *</label>
                             <span class="field">
-                                <select name="status" id="status" class="status">
-                                        <option value="active"> Active</option>
-                                        <option value="non-active"> Non-active</option>
+                                <select name="status" id="status" class="status" readonly="readonly">
+                                        <option value="active" <?php if($theme['status']==='active'){echo 'selected';} ?> > Active</option>
+                                        <option value="non-active" <?php if($theme['status']==='non-active'){echo 'selected';} ?>> Non-active</option>
                                 </select>  
                             </span>
                         </p>
@@ -116,13 +115,13 @@ jQuery(document).ready(function (){
                         <p>
                             <label>Admin *</label>
                             <span class="field">
-                                <select id="admin_id" name="admin_id">
+                                <select id="admin_id" name="admin_id" readonly="readonly">
                                 <?php 
                                 $reqAdmin = $bdd->query('SELECT * FROM admin') or die(print_r($bdd->errorInfo()));
 
                                 while ($admin = $reqAdmin->fetch())
                                     {?>
-                                    <option value="<?php echo $admin['id']; ?>"><?php echo $admin['company']; ?></option>
+                                    <option value="<?php echo $admin['id']; ?>" <?php if($admin['id']===$theme['admin_id']){echo 'selected';} ?>>  <?php echo $admin['company']; ?></option>
                                 <?php }?>
                                 </select>
                             </span>
@@ -132,54 +131,53 @@ jQuery(document).ready(function (){
                         <p>
                             <label>URL *</label>
                             <span class="field">
-                                <input type="url" name="url" class="input-xxlarge" required="required" />
+                                <input type="url" name="url" class="input-xxlarge" value="<?php echo $theme['url'] ?>" readonly="readonly" />
                             </span>
                         </p>
 
                         <p>
                             <label>Meta  *</label>
                             <span class="field">
-                                <input type="text" name="meta" class="input-xxlarge" required="required" />
+                                <input type="text" name="meta" class="input-xxlarge" value="<?php echo $theme['meta'] ?>" readonly="readonly" />
                             </span>
                         </p>
                         
                         <p>
                             <label>Title  *</label>
                             <span class="field">
-                                <input type="text" name="title" class="input-xxlarge" required="required" />
+                                <input type="text" name="title" class="input-xxlarge" value="<?php echo $theme['title'] ?>" readonly="readonly" />
                             </span>
                         </p>
                         
                         <p>
                             <label>Text *</label>
                             <span class="field">
-                                <input type="text" id="text"  name="text" class="input-xxlarge" required="required" />
+                                <input type="text" id="text"  name="text" class="input-xxlarge" value="<?php echo $theme['text'] ?>" readonly="readonly" />
                             </span>
                         </p>
                         
                         <p>
                             <label>Alt *</label>
                             <span class="field">
-                                <input type="text" id="alt"  name="alt" class="input-xxlarge" required="required" />
+                                <input type="text" id="alt"  name="alt" class="input-xxlarge" value="<?php echo $theme['alt'] ?>" readonly="readonly" />
                             </span>
                         </p>
                         <p>
                             <label>Link *</label>
                             <span class="field">
-                                <input type="text" id="link"  name="link" class="input-xxlarge" required="required" />
+                                <input type="text" id="link"  name="link" class="input-xxlarge" value="<?php echo $theme['link'] ?>" readonly="readonly" />
                             </span>
                         </p>
                         
                         <p>
                             <label>h1 *</label>
                             <span class="field">
-                                <input type="text" id="h1"  name="h1" class="input-xxlarge" required="required" />
+                                <input type="text" id="h1"  name="h1" class="input-xxlarge" value="<?php echo $theme['h1'] ?>" readonly="readonly" />
                             </span>
                         </p>
                                                                    
                         <p class="stdformbutton" style="text-align: center">
-                            <button type="submit" name="submit" id="submit" class="btn btn-primary">Create </button>
-                            <button type="reset" class="btn">Reset </button>
+                            <button type="submit" name="submit" id="submit" class="btn btn-primary">Update </button>
                         </p>
                         
                                                 </form> <?php }?>

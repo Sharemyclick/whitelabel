@@ -72,6 +72,65 @@ jQuery(document).ready(function (){
                 
                 <?php
                      if(isset($_POST['submit'])){
+                         
+//---------------------------------------------//
+//test for image
+            $dossier = 'C:/xampp/htdocs/white_label/admin/img/themes/';//TODO remove local part when upload to server !!
+            $fichier = basename($_FILES['image']['name']);
+            $taille_maxi = 300000;
+            $taille = filesize($_FILES['image']['tmp_name']);
+            $extensions = array('.png', '.gif', '.jpg', '.jpeg', '.JPG', '.JPEG', '.GIF', '.PNG');
+            $extension = strrchr($_FILES['image']['name'], '.'); 
+    // Start safety checks ...
+    if(!in_array($extension, $extensions)) // If the extension is not in the table
+            {
+        $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg ...';
+            }
+    if($taille>$taille_maxi)
+            {
+        $erreur = 'l\'image est trop lourde. Maximum de 500ko...';
+            }
+    if(!isset($erreur)) //if error=null, upload the picture
+            {
+            // It formats the file name 
+            $fichier = strtr($fichier, 
+                        'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
+                'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
+            $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
+
+            $return = move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $fichier); // If the function returns TRUE, it worked
+              
+            }
+    
+            
+//---------------------------------------------//
+//test for picto
+            $dossier2 = 'C:/xampp/htdocs/white_label/admin/img/themes/';//TODO remove local part when upload to server !!
+            $fichier2 = basename($_FILES['picto']['name']);
+            $taille_maxi2 = 300000;
+            $taille2 = filesize($_FILES['picto']['tmp_name']);
+            $extensions2 = array('.png', '.gif', '.jpg', '.jpeg', '.JPG', '.JPEG', '.GIF', '.PNG');
+            $extension2 = strrchr($_FILES['picto']['name'], '.'); 
+    // Start safety checks ...
+    if(!in_array($extension2, $extensions2)) // If the extension is not in the table
+            {
+        $erreur2 = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg ...';
+            }
+    if($taille2>$taille_maxi2)
+            {
+        $erreur2 = 'l\'image est trop lourde. Maximum de 500ko...';
+            }
+    if(!isset($erreur2)) //if error=null, upload the picture
+            {
+            // It formats the file name 
+            $fichier2 = strtr($fichier2, 
+                        'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
+                'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
+            $fichier2 = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier2);
+
+            $return2 = move_uploaded_file($_FILES['picto']['tmp_name'], $dossier2 . $fichier2); // If the function returns TRUE, it worked
+              
+            }
                         
 //---------------------- INSERT THEMES ---------------------------------------------------------------------
         $reqThemes = $bdd->prepare('INSERT INTO themes (name, image, picto, status, admin_id)'.
@@ -79,8 +138,8 @@ jQuery(document).ready(function (){
 // We execute the request by transmitting the parameter list
 	$reqThemes->execute(array(
 		'name' => $_POST['name'],
-                'image' => $_POST['image'],
-                'picto' => $_POST['picto'],
+                'image' => $_FILES['image']['name'],
+                'picto' => $_FILES['picto']['name'],
                 'status' => $_POST['status'],
                 'admin_id' => $_POST['admin_id']
                 
@@ -106,14 +165,14 @@ jQuery(document).ready(function (){
                 // The request processing is terminated
                 $reqThemesTemplate->closeCursor();                    
                          
-                         ?>   
+             ?>   
                 
                          <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The theme has been created </h4> </br>
                                     <p class="stdformbutton" style="text-align: center" >
                                       <a href="create-theme.php" >
                                         <button type="button" name="create_another_theme" id="create_another_theme" class="btn btn-primary" >Create another theme </button>
                                       </a>
-                                     <a href="view-theme.php" >
+                                     <a href="view-theme-globalview.php" >
                                         <button type="button" name="view_all_theme" id="view_all_theme" class="btn btn-primary" >View all theme </button>
                                       </a>
                 
@@ -136,17 +195,15 @@ jQuery(document).ready(function (){
                         </p>
                         
                         <p>
-                            <label>Image *</label>
-                            <span class="field">
-                                <input type="text" name="image" class="input-xxlarge" required="required" />
-                            </span>
+                           <label>Image <span style="color: red"> (nom sans espace)</span></label>
+                           <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+                           <span class="field"><input type="file" name="image" id="image" /></span>
                         </p>
                         
                         <p>
-                            <label>Picto *</label>
-                            <span class="field">
-                                <input type="text" name="picto" class="input-xxlarge" required="required" />
-                            </span>
+                            <label>Picto <span style="color: red"> (nom sans espace)</span></label>
+                           <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+                           <span class="field"><input type="file" name="picto" id="picto" /></span>
                         </p>
                         
                         <p>
