@@ -222,6 +222,27 @@
                         </ul>
                     </li>  
                     
+                    <li id="li-display" class="dropdown"><a href=""><span class="icon-tasks"></span> DISPLAY</a>
+                        <ul>
+                           
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-display' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="view-display-globalview.php">View display</a></li>
+                            <?php }?>
+                             <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-display' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="create-display.php">Create display</a></li>
+                            <?php }?>
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-display' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="update-display-globalview.php">Modify display</a></li>
+                            <?php }?>
+                        </ul>
+                    </li>  
+                    
                     <li id="li-webservice" class="dropdown"><a href=""><span class="icon-wrench"></span> WEBSERVICE</a>
                         <ul>
                            

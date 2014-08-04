@@ -77,7 +77,7 @@ jQuery(document).ready(function (){
 //test for image
             $dossier = 'C:/xampp/htdocs/white_label/admin/img/categories/';//TODO remove local part when upload to server !!
             $fichier = basename($_FILES['image']['name']);
-            $taille_maxi = 300000;
+            $taille_maxi = 3000000;
             $taille = filesize($_FILES['image']['tmp_name']);
             $extensions = array('.png', '.gif', '.jpg', '.jpeg', '.JPG', '.JPEG', '.GIF', '.PNG');
             $extension = strrchr($_FILES['image']['name'], '.'); 
@@ -107,7 +107,7 @@ jQuery(document).ready(function (){
 //test for picto
             $dossier2 = 'C:/xampp/htdocs/white_label/admin/img/categories/';//TODO remove local part when upload to server !!
             $fichier2 = basename($_FILES['picto']['name']);
-            $taille_maxi2 = 300000;
+            $taille_maxi2 = 3000000;
             $taille2 = filesize($_FILES['picto']['tmp_name']);
             $extensions2 = array('.png', '.gif', '.jpg', '.jpeg', '.JPG', '.JPEG', '.GIF', '.PNG');
             $extension2 = strrchr($_FILES['picto']['name'], '.'); 
@@ -213,7 +213,7 @@ jQuery(document).ready(function (){
                         
                         <p>
                            <label>Image <span style="color: red"> (nom sans espace)</span></label>
-                           <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+                           <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
                            <span class="field"><input type="file" name="image" id="image" /></span>
                         </p>
                         

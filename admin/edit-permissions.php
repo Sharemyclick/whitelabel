@@ -442,6 +442,37 @@ if(isset($_POST['submitChanges'])){
                             <td class="centeralign"><input type="checkbox" name="update-category|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-category' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                         </tr>
                         
+                        <tr>
+                        <td colspan="9" class="leftalign"><strong>DISPLAY PERMISSIONS</strong></td>
+                        </tr>	
+                        
+                        <tr>
+                            <td class="centeralign">View display</td>
+                            <td class="centeralign"><input type="checkbox" name="view-display|1" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-display' AND admin_rights_id = 1");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="view-display|2" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-display' AND admin_rights_id = 2");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="view-display|3" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-display' AND admin_rights_id = 3");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="view-display|4" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-display' AND admin_rights_id = 4");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="view-display|5" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-display' AND admin_rights_id = 5");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="view-display|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='view-display' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                        </tr>
+                        <tr>
+                            <td class="centeralign">Create display</td>
+                            <td class="centeralign"><input type="checkbox" name="create-display|1" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-display' AND admin_rights_id = 1");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="create-display|2" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-display' AND admin_rights_id = 2");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="create-display|3" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-display' AND admin_rights_id = 3");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="create-display|4" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-display' AND admin_rights_id = 4");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="create-display|5" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-display' AND admin_rights_id = 5");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="create-display|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='create-display' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                        </tr>
+                        <tr>
+                            <td class="centeralign">Update display</td>
+                            <td class="centeralign"><input type="checkbox" name="update-display|1" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-display' AND admin_rights_id = 1");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="update-display|2" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-display' AND admin_rights_id = 2");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="update-display|3" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-display' AND admin_rights_id = 3");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="update-display|4" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-display' AND admin_rights_id = 4");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="update-display|5" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-display' AND admin_rights_id = 5");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="update-display|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='update-display' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                        </tr>
                         
                         <tr>
                         <td colspan="9" class="leftalign"><strong>WEBSERVICE PERMISSIONS</strong></td>
