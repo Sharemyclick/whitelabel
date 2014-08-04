@@ -207,7 +207,7 @@
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'view-categories' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="view-categories.php">View categories</a></li>
+                            <li><a href="view-category-globalview.php">View categories</a></li>
                             <?php }?>
                              <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'create-category' and admin_rights_id = ".$_SESSION['right']);
@@ -217,7 +217,7 @@
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-category' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="update-category.php">Modify category</a></li>
+                            <li><a href="update-category-globalview.php">Modify category</a></li>
                             <?php }?>
                         </ul>
                     </li>  

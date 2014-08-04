@@ -95,7 +95,7 @@ jQuery(document).ready(function (){
                     {
 //-----------------------------------------------------------------------------------// 
 //UPDATE themes table
-        $bdd->exec(' UPDATE themes SET name="'.$_POST['name'].'", image="'.$_POST['image'].'", picto="'.$_POST['picto'].'", status="'.$_POST['status'].'", admin_id="'.$_POST['admin_id'].'" WHERE id='.$id_theme);
+        $bdd->exec(' UPDATE themes SET name="'.$_POST['name'].'", image="'.$_POST['image'].'", picto="'.$_POST['picto'].'",  admin_id="'.$_POST['admin_id'].'" WHERE id='.$id_theme);
 //---------------------------------------------------------------------------------------//
         
 //-----------------------------------------------------------------------------------// 
@@ -149,9 +149,22 @@ jQuery(document).ready(function (){
                         <p>
                             <label>Status *</label>
                             <span class="field">
-                                <select name="status" id="status" class="status" required="required" >
-                                        <option value="active" <?php if($theme['status']==='active'){echo 'selected';} ?> > Active</option>
-                                        <option value="non-active" <?php if($theme['status']==='non-active'){echo 'selected';} ?>> Non-active</option>
+                                <?php 
+                                            if ($theme['status']=='active')
+                                            {
+                                                ?><input type="button" class="btn btn-success" value="Status : Active">
+                                                    &nbsp;  <input  type="submit" class="btn" name="deactivate" value='Deactivate the theme'> 
+                                                <?php ;
+                                            
+                                            }
+                                            if  ($theme['status']=='non-active')
+                                            {
+                                                ?><input type="button" class="btn btn-danger" value="Status : Non-active"  > 
+                                                &nbsp;  <input  type="submit" class="btn" name="activate" value='Activate the theme'>
+                                                <?php ;
+                                            }
+                                            
+                                        ?>
                                 </select>  
                             </span>
                         </p>
@@ -222,22 +235,7 @@ jQuery(document).ready(function (){
                                                                    
                         <p class="stdformbutton" style="text-align: center">
                             <button type="submit" name="submit" id="submit" class="btn btn-primary">Update </button>
-                            <?php 
-                                            if ($theme['status']=='active')
-                                            {
-                                                ?><input type="button" class="btn btn-success" value="Status : Active">
-                                                    &nbsp;  <input  type="submit" class="btn" name="deactivate" value='Deactivate the theme'> 
-                                                <?php ;
-                                            
-                                            }
-                                            if  ($theme['status']=='non-active')
-                                            {
-                                                ?><input type="button" class="btn btn-danger" value="Status : Non-active"  > 
-                                                &nbsp;  <input  type="submit" class="btn" name="activate" value='Activate the theme'>
-                                                <?php ;
-                                            }
-                                            
-                                        ?>
+                           
                             
                         </p>
                         

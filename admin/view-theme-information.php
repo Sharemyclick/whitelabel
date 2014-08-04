@@ -105,10 +105,20 @@ jQuery(document).ready(function (){
                         <p>
                             <label>Status *</label>
                             <span class="field">
-                                <select name="status" id="status" class="status" readonly="readonly">
-                                        <option value="active" <?php if($theme['status']==='active'){echo 'selected';} ?> > Active</option>
-                                        <option value="non-active" <?php if($theme['status']==='non-active'){echo 'selected';} ?>> Non-active</option>
-                                </select>  
+                                 <?php 
+                                            if ($theme['status']=='active')
+                                            {
+                                                ?><input type="button" class="btn btn-success" value="Status : Active">
+                                                <?php ;
+                                            
+                                            }
+                                            if  ($theme['status']=='non-active')
+                                            {
+                                                ?><input type="button" class="btn btn-danger" value="Status : Non-active"  > 
+                                                <?php ;
+                                            }
+                                            
+                                        ?>
                             </span>
                         </p>
                         
@@ -177,7 +187,7 @@ jQuery(document).ready(function (){
                         </p>
                                                                    
                         <p class="stdformbutton" style="text-align: center">
-                            <button type="submit" name="submit" id="submit" class="btn btn-primary">Update </button>
+                            <button type="submit" name="update" id="submit" class="btn btn-primary">Update </button>
                         </p>
                         
                                                 </form> <?php }?>
