@@ -322,7 +322,7 @@
                             <?php
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-tags' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
-                            <li><a href="update-tags.php">Modify google tag</a></li>
+                            <li><a href="update-tags-globalview.php">Modify google tag</a></li>
                             <?php }?>
                         
                     	
