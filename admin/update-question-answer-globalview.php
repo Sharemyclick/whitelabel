@@ -90,7 +90,7 @@ jQuery(document).ready(function (){
           
         </div><!--breadcrumbwidget-->
       <div class="pagetitle">
-        	<h1>View Users</h1> <span><strong><?php echo ucfirst($_SESSION['login']); ?></strong> , please see all the questions and associated answers. </span>
+        	<h1>Modify questions and answers</h1> <span><strong><?php echo ucfirst($_SESSION['login']); ?></strong> , please see all the questions and associated answers. </span>
         </div><!--pagetitle-->
         
         <div class="maincontent">

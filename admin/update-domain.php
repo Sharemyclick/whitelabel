@@ -72,7 +72,7 @@ jQuery(document).ready(function (){
             
         </div><!--breadcrumbwidget-->
         <div class="pagetitle">
-        	<h1>Update Domain</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to update the domain.</span>
+        	<h1>Modify Domain</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to update the domain.</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">

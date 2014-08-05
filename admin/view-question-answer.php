@@ -63,7 +63,7 @@ jQuery(document).ready(function (){
           
         </div><!--breadcrumbwidget-->
       <div class="pagetitle">
-        	<h1>View Users</h1> <span><strong><?php echo ucfirst($_SESSION['login']); ?></strong> , please see all the questions and associated answers. </span>
+        	<h1>View questions and associated answers</h1> <span><strong><?php echo ucfirst($_SESSION['login']); ?></strong> , please see all the questions and associated answers. </span>
         </div><!--pagetitle-->
         
         <div class="maincontent">
@@ -83,7 +83,7 @@ jQuery(document).ready(function (){
                         <tr>
                             <th class="centeralign">Question</th>
                             <th class="centeralign">Answer</th>
-                            <th class="centeralign"></th>
+                            <th class="centeralign">Update</th>
 
 							
                     </thead>

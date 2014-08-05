@@ -250,22 +250,7 @@ jQuery(document).ready(function (){
                                                                    
                         <p class="stdformbutton" style="text-align: center">
                             <button type="submit" name="submit" id="submit" class="btn btn-primary">Update </button>
-                            <?php 
-                                            if ($category['status']=='active')
-                                            {
-                                                ?><input type="button" class="btn btn-success" value="Status : Active">
-                                                    &nbsp;  <input  type="submit" class="btn" name="deactivate" value='Deactivate the theme'> 
-                                                <?php ;
-                                            
-                                            }
-                                            if  ($category['status']=='non-active')
-                                            {
-                                                ?><input type="button" class="btn btn-danger" value="Status : Non-active"  > 
-                                                &nbsp;  <input  type="submit" class="btn" name="activate" value='Activate the theme'>
-                                                <?php ;
-                                            }
-                                            
-                                        ?>
+                            
                             
                         </p>
                         

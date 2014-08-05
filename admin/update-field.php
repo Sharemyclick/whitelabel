@@ -65,7 +65,7 @@ jQuery(document).ready(function (){
             
         </div><!--breadcrumbwidget-->
         <div class="pagetitle">
-        	<h1>Create field</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new field.</span>
+        	<h1>Modify field</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to modify the field.</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">

@@ -145,10 +145,10 @@ jQuery(document).ready(function (){
                          <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The User has been created </h4> </br>
                                     <p class="stdformbutton" style="text-align: center" >
                                       <a href="create-user.php" >
-                                        <button type="button" name="create_another_user" id="create_another_advertiser" class="btn btn-primary" >Create another advertiser </button>
+                                        <button type="button" name="create_another_user" id="create_another_user" class="btn btn-primary" >Create another user </button>
                                       </a>
                                      <a href="view-users.php" >
-                                        <button type="button" name="view_all_user" id="view_all_advertiser" class="btn btn-primary" >View all advertisers </button>
+                                        <button type="button" name="view_all_user" id="view_all_user" class="btn btn-primary" >View all users </button>
                                       </a>
                                         
                 <?php if($_POST['admin_rights_id']=== '4'){

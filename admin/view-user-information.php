@@ -80,8 +80,7 @@ jQuery(document).ready(function (){
         	<div class="contentinner content-editprofile">
             	<h4 class="widgettitle nomargin">Edit Profile</h4>
                 <div class="widgetcontent bordered">
-                	<div class="row-fluid">
-                    	<div class="span3 profile-left">
+                	
                             
                             <?php
 					// it recovers contents from the table admin and admin rights
@@ -89,7 +88,8 @@ jQuery(document).ready(function (){
 					// On affiche chaque entrée une à une et celà tant qu'il y en a
 					while ($donnees = $reponse->fetch())
 						{?>
-                        
+                        <div class="row-fluid">
+                    	<div class="span3 profile-left">
                         	<h4>Company's logo</h4>
                             
                             <div class="profilethumb">

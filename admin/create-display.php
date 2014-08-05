@@ -143,7 +143,7 @@ jQuery(document).ready(function (){
                                       <a href="create-display.php" >
                                         <button type="button" name="create_another_display" id="create_another_display" class="btn btn-primary" >Create another display </button>
                                       </a>
-                                     <a href="view-category-globalview.php" >
+                                     <a href="view-display-globalview.php" >
                                         <button type="button" name="view_all_display" id="view_all_display" class="btn btn-primary" >View all displays </button>
                                       </a>
                 

@@ -118,7 +118,7 @@ jQuery(document).ready(function (){
             
         </div><!--breadcrumbwidget-->
         <div class="pagetitle">
-        	<h1>Create User</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new form.</span>
+        	<h1>Create Quote</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new quote.</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">

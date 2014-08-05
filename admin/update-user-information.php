@@ -75,10 +75,7 @@ jQuery(document).ready(function (){
         
         <div class="maincontent">
         	<div class="contentinner content-editprofile">
-            	<h4 class="widgettitle nomargin">Edit Profile</h4>
-                <div class="widgetcontent bordered">
-                	<div class="row-fluid">
-                    	<div class="span3 profile-left">
+            	
                             
                             <?php
                             
@@ -88,17 +85,16 @@ jQuery(document).ready(function (){
                          
                          
                          ?>   
-                            <span class="field" style="text-align: center">
-                                 <p class="stdformbutton" style="text-align: center">
-
-                         <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The User has been created </h4> </br>
-                                    
-                                      <a href="update-globalview-user.php" ><button type="button" name="update_another_user" id="update_another_user" class="btn btn-primary" >Update another user </button></a>
-                                      <a href="view-users.php" ><button type="button" name="view_all_user" id="view_all_advertiser" class="btn btn-primary" >View all users </button>
+                            <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;"> The user has been updated </h4> </br>
+                                    <p class="stdformbutton" style="text-align: center" >
+                                        <a href="update-globalview-user.php" >
+                                        <button type="button" name="update-globalview-user" id="globalview" class="btn btn-primary" >Modify another user </button>
                                       </a>
+                                     <a href="view-users.php" >
+                                        <button type="button" name="view_all_user" id="view_all_user" class="btn btn-primary" >View all users </button>
+                                      </a>
+                
                                 </p>   
-                                
-                                         </span>
                                 
                 <?php ;}
                 Else {?>
@@ -109,7 +105,10 @@ jQuery(document).ready(function (){
 					// On affiche chaque entrée une à une et celà tant qu'il y en a
 					while ($donnees = $reponse->fetch())
 						{?>
-                        
+                        <h4 class="widgettitle nomargin">Edit Profile</h4>
+                <div class="widgetcontent bordered">
+                	<div class="row-fluid">
+                    	<div class="span3 profile-left">
                         	<h4>Company's logo</h4>
                             
                             <div class="profilethumb">

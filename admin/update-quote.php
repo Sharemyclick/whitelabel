@@ -65,7 +65,7 @@ jQuery(document).ready(function (){
             
         </div><!--breadcrumbwidget-->
         <div class="pagetitle">
-        	<h1>Create User</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new form.</span>
+        	<h1>Modify Quote</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to modify the quote.</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">
@@ -139,7 +139,7 @@ jQuery(document).ready(function (){
                 
                          <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The quote has been updated </h4> </br>
                                     <p class="stdformbutton" style="text-align: center" >
-                                        <a href="update-domain-globalview.php" >
+                                        <a href="update-quote-globalview.php" >
                                         <button type="button" name="update_another_quote" id="update_another_quote" class="btn btn-primary" >Update another quote </button>
                                       </a>
                                      <a href="view-quote.php" >

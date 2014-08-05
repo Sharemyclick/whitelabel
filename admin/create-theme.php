@@ -63,7 +63,7 @@ jQuery(document).ready(function (){
             
         </div><!--breadcrumbwidget-->
         <div class="pagetitle">
-        	<h1>Create theme</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new user.</span>
+        	<h1>Create theme</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new theme.</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">

@@ -65,7 +65,7 @@ $reqAnswer = $bdd->query('SELECT * FROM answers LEFT JOIN answers_questions ON a
       
         </div><!--breadcrumbwidget-->
         <div class="pagetitle">
-        	<h1> Question & Answer(s)</h1> <span><?php echo $_SESSION['login']; ?> , here you can modify the data.</span>
+        	<h1> Modify Question & Answer(s)</h1> <span><?php echo $_SESSION['login']; ?> , here you can modify the data.</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">

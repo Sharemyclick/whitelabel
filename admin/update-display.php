@@ -1,7 +1,17 @@
 <?php
 //It includes the page parameter connection.
 include('conf.php');
+$id_display=$_GET['id'];
 
+//ACTIVATION AND DESACTIVATION of the status
+if(isset($_POST['deactivate']))
+{
+    $bdd->exec('UPDATE display SET status = "non-active" WHERE id='.$id_display);
+}
+if(isset($_POST['activate']))
+{
+    $bdd->exec('UPDATE display SET status = "active" WHERE id='.$id_display);
+}
 ?>
 <!DOCTYPE html>
 <head>
@@ -63,7 +73,7 @@ jQuery(document).ready(function (){
             
         </div><!--breadcrumbwidget-->
         <div class="pagetitle">
-        	<h1>Create Display</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new display.</span>
+        	<h1>Modify Display</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to update a new display.</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">
@@ -74,76 +84,37 @@ jQuery(document).ready(function (){
                      if(isset($_POST['submit'])){
                          
 //---------------------------------------------//
-//test for image
-            $dossier = 'C:/xampp/htdocs/white_label/admin/img/display/';//TODO remove local part when upload to server !!
-            $fichier = basename($_FILES['image']['name']);
-            $taille_maxi = 300000;
-            $taille = filesize($_FILES['image']['tmp_name']);
-            $extensions = array('.png', '.gif', '.jpg', '.jpeg', '.JPG', '.JPEG', '.GIF', '.PNG');
-            $extension = strrchr($_FILES['image']['name'], '.'); 
-    // Start safety checks ...
-    if(!in_array($extension, $extensions)) // If the extension is not in the table
-            {
-        $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg ...';
-            }
-    if($taille>$taille_maxi)
-            {
-        $erreur = 'l\'image est trop lourde. Maximum de 500ko...';
-            }
-    if(!isset($erreur)) //if error=null, upload the picture
-            {
-            // It formats the file name 
-            $fichier = strtr($fichier, 
-                        'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
-                'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
-            $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
-
-            $return = move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $fichier); // If the function returns TRUE, it worked
-              
-            }
-
-                        
-//---------------------- INSERT THEMES ---------------------------------------------------------------------
-        $reqThemes = $bdd->prepare('INSERT INTO display (name, image, type, text, href, script, status, intern_link)'.
-        'VALUES (:name, :image, :type, :text, :href, :script, :status, :intern_link)');
-// We execute the request by transmitting the parameter list
-	$reqThemes->execute(array(
-                'name' => $_POST['name'],
-		'image' => $_FILES['image']['name'],
-                'type' => $_POST['type'],
-                'text' => $_POST['text'],
-                'href' => $_POST['href'],
-                'script' => $_POST['script'],
-                'status' => $_POST['status'],
-                'intern_link' => $_POST['intern_link']
-                
-		)) or die(print_r($reqThemes->errorInfo())); // Oit tracks error if there is one
-                $id_display = $bdd->lastInsertId();
-                // The request processing is terminated
-                $reqThemes->closeCursor();
+            
+//-----------------------------------------------------------------------------------// 
+        //UPDATE FORM
+        $bdd->exec(' UPDATE display SET name="'.$_POST['name'].'" , type="'.$_POST['type'].'", text="'.$_POST['text'].'", href="'.$_POST['href'].'", script="'.$_POST['script'].'", intern_link="'.$_POST['intern_link'].'"  WHERE id='.$id_display);
+//---------------------------------------------------------------------------------------//
+        //DELETE AND INSERT form_answers_questions
+        $bdd->exec('DELETE FROM categories_display WHERE display_id='.$id_display); 
         
-        foreach ($_POST['idCategories'] as $selectedField)
+        foreach ($_POST['idCategories'] as $selectedOption)
         {
-            $reqFormField = $bdd->prepare('INSERT INTO categories_display (display_id, categories_id) VALUES (:display_id, :categories_id)');
+            $reqCategoriesDisplay = $bdd->prepare('INSERT INTO categories_display (categories_id, display_id) VALUES (:categories_id, :display_id)');
             // We execute the request by transmitting the parameter list
-            $reqFormField->execute(array(
-		'display_id' => $id_display,
-		'categories_id' => $selectedField
+            $reqCategoriesDisplay->execute(array(
+		'categories_id' => $selectedOption,
+		'display_id' => $id_display
             
-		)) or die(print_r($reqFormField->errorInfo())); // It tracks  the error if there is one
+		)) or die(print_r($reqCategoriesDisplay->errorInfo())); // It tracks  the error if there is one
             // The request processing is terminated
-            $reqFormField->closeCursor();
+            $reqCategoriesDisplay->closeCursor();
             
-        }               
-                         
+        }
+        
+//---------------------------------------------------------------------------------------//
              ?>   
                 
-                         <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The display has been created </h4> </br>
+                         <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;"> The display has been created </h4> </br>
                                     <p class="stdformbutton" style="text-align: center" >
-                                      <a href="create-display.php" >
-                                        <button type="button" name="create_another_display" id="create_another_display" class="btn btn-primary" >Create another display </button>
+                                        <a href="update-display-globalview.php" >
+                                        <button type="button" name="create_another_display" id="create_another_display" class="btn btn-primary" >Modify another display </button>
                                       </a>
-                                     <a href="view-category-globalview.php" >
+                                     <a href="view-display-globalview.php" >
                                         <button type="button" name="view_all_display" id="view_all_display" class="btn btn-primary" >View all displays </button>
                                       </a>
                 
@@ -157,62 +128,78 @@ jQuery(document).ready(function (){
 					
                 <div class="widgetcontent bordered shadowed nopadding">
                     <form name="form_user" class="stdform stdform2" method="post" action="" enctype="multipart/form-data">
-                        
+                        <?php
+					// Request for data from display
+					$reqDisplay = $bdd->query('SELECT * FROM display WHERE id='.$id_display) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
+                                        while ($display = $reqDisplay->fetch())
+						{?>
                         <p>
                             <label>Name *</label>
                             <span class="field">
-                                <input type="text" name="name" class="input-xxlarge" required="required" />
+                                <input type="text" name="name" value="<?php echo $display['name']; ?>" class="input-xxlarge" required="required" />
                             </span>
                         </p>
                         
                         <p>
                            <label>Image <span style="color: red"> (nom sans espace)</span></label>
                            <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
-                           <span class="field"><input type="file" name="image" id="image" /></span>
+                           <span class="field"><img  src="<?php echo 'http://localhost/white_label/admin/img/display/'.$display['image'] ?>" height="184" width="104" ></span>
                         </p>
                         
                         <p>
                             <label>type  *</label>
                             <span class="field">
-                                <input type="text" name="type" class="input-xxlarge" required="required" />
+                                <input type="text" name="type" value="<?php echo $display['type']; ?>" class="input-xxlarge" required="required" />
                             </span>
                         </p>
                         
                         <p>
                             <label>Text *</label>
                             <span class="field">
-                                <input type="text" id="text"  name="text" class="input-xxlarge" required="required" />
+                                <input type="text" id="text"  name="text" value="<?php echo $display['text']; ?>" class="input-xxlarge" required="required" />
                             </span>
                         </p>
                         
                         <p>
                             <label>href *</label>
                             <span class="field">
-                                <input type="text" name="href" class="input-xxlarge" required="required" />
+                                <input type="text" name="href" class="input-xxlarge" value="<?php echo $display['href']; ?>" required="required" />
                             </span>
                         </p>
                         
                         <p>
                             <label>Script *</label>
                             <span class="field">
-                                <input type="text" name="script" class="input-xxlarge" required="required" />
+                                <input type="text" name="script" class="input-xxlarge" value="<?php echo $display['script']; ?>" required="required" />
                             </span>
                         </p>
                        
                         <p>
                             <label>Status *</label>
                             <span class="field">
-                                <select name="status" id="status" class="status">
-                                        <option value="active"> Active</option>
-                                        <option value="non-active"> Non-active</option>
-                                </select>  
+                                <?php 
+                                            if ($display['status']=='active')
+                                            {
+                                                ?><input type="button" class="btn btn-success" value="Status : Active">
+                                                    &nbsp;  <input  type="submit" class="btn" name="deactivate" value='Deactivate the status'> 
+                                                <?php ;
+                                            
+                                            }
+                                            if  ($display['status']=='non-active')
+                                            {
+                                                ?><input type="button" class="btn btn-danger" value="Status : Non-active"  > 
+                                                &nbsp;  <input  type="submit" class="btn" name="activate" value='Activate the status'>
+                                                <?php ;
+                                            }
+                                            
+                                        ?>
                             </span>
                         </p>
                         
                         <p>
                             <label>Intern link *</label>
                             <span class="field">
-                                <input type="text" name="intern_link" class="input-xxlarge" required="required" />
+                                <input type="text" name="intern_link" class="input-xxlarge"  value="<?php echo $display['intern_link']; ?>" required="required" />
                             </span>
                         </p>
 
@@ -221,11 +208,12 @@ jQuery(document).ready(function (){
                             <span id="dualselect" class="dualselect">
                             	<select class="uniformselect"  name="idCategories[]" multiple size="12" >
                                     <?php
-                                    $reqCategories = $bdd->query("SELECT * FROM categories ");
-                                    while ($categoriesList = $reqCategories->fetch())
+                                    $reqCategoriesList = $bdd->query("SELECT * FROM categories ");
+                                    while ($categoriesList = $reqCategoriesList->fetch())
                                     {
+                                    $reqCategoriesSelected = $bdd->query("SELECT * FROM categories_display WHERE display_id=".$id_display);
                                         ?>
-                                        <option value="<?php echo $categoriesList['id']; ?>" > <?php echo $categoriesList['name'];?></option>
+                                        <option value="<?php echo $categoriesList['id']; ?>" <?php while ($categoriesSelected = $reqCategoriesSelected->fetch()){if( $categoriesSelected['categories_id'] === $categoriesList['id']) {echo 'selected';} } ?> > <?php echo $categoriesList['name'];?></option>
                                     <?php 
                                     }?>
                                 </select>
@@ -240,12 +228,12 @@ jQuery(document).ready(function (){
                         </p>
                                                              
                         <p class="stdformbutton" style="text-align: center">
-                            <button type="submit" name="submit" id="submit" class="btn btn-primary">Create </button>
+                            <button type="submit" name="submit" id="submit" class="btn btn-primary">Update </button>
                         </p>
                         
                         </form>
                     </div>				
-                </div><!--contentinner--> <?php }; ?>
+                </div><!--contentinner--> <?php }}; ?>
             </div><!--contentinner-->
         </div><!--maincontent-->
         

@@ -65,7 +65,7 @@ jQuery(document).ready(function (){
             
         </div><!--breadcrumbwidget-->
         <div class="pagetitle">
-        	<h1>Create User</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new form.</span>
+        	<h1>Modify Form</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to modify a form.</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">
@@ -122,7 +122,7 @@ jQuery(document).ready(function (){
                          <h4 class='confirmation' style="text-align: center; background:#1FC63D; opacity:0.8;">The fom has been created </h4> </br>
                                     <p class="stdformbutton" style="text-align: center" >
                                         <a href="update-form-globalview.php" >
-                                        <button type="button" name="update_another_form" id="create_another_form" class="btn btn-primary" >update another form </button>
+                                        <button type="button" name="update_another_form" id="create_another_form" class="btn btn-primary" >Update another form </button>
                                       </a>
                                      <a href="view-form.php" >
                                         <button type="button" name="view_all_form" id="view_all_form" class="btn btn-primary" >View all forms </button>

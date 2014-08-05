@@ -152,10 +152,10 @@
                             <li><a href="create-field.php">Create field</a></li>
                             <?php }?>
                             <?php
-                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-field' and admin_rights_id = ".$_SESSION['right']);
-                            if($req_menu->rowCount() > 0){?>
-                            <li><a href="update-field-globalview.php">Modify field</a></li>
-                            <?php }?>
+                            //$req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'update-field' and admin_rights_id = ".$_SESSION['right']);
+                            //if($req_menu->rowCount() > 0){?>
+                            <!--<li><a href="update-field-globalview.php">Modify field</a></li>-->
+                            <?php //}?>
                         </ul>
                     </li>  
                     

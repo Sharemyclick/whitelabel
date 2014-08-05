@@ -77,7 +77,7 @@ jQuery(document).ready(function (){
             
         </div><!--breadcrumbwidget-->
         <div class="pagetitle">
-        	<h1>Create User</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new form.</span>
+        	<h1>Create Domain</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new domain.</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">

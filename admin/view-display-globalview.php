@@ -107,7 +107,7 @@ jQuery(document).ready(function (){
                         <tr>
                         <form class="stdform" method="post" action="update-display-information.php?id=<?php echo $display['id'];?>">
 
-                            <td class="centeralign" > <p align="center"> <?php echo $display['name'] ?></p>
+                            <td class="centeralign" > <b><p align="center"> <?php echo $display['name'] ?></b></p>
                             </td>
                                                         
                             <td>
@@ -162,10 +162,18 @@ jQuery(document).ready(function (){
                                  </p>
                             </td>
                             
-                            <td>
-                                 <p align="center"> 
-                                    <?php echo $display['intern_link'] ?>
-                                 </p>
+                            <td >
+                                <p align="center" > <a>
+                                    <?php
+                                     $length= strlen($display['intern_link']);
+                                    if ($length<=30)
+                                    {echo $display['intern_link'];}
+                                    else
+                                    {echo substr($display['intern_link'], 0, -20).'...';}
+                                    
+                                    ?>
+                                    </a>
+                                </p>
                                
                             </td>
                                

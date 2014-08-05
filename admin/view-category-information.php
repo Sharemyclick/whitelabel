@@ -63,7 +63,7 @@ jQuery(document).ready(function (){
             
         </div><!--breadcrumbwidget-->
         <div class="pagetitle">
-        	<h1>Create Category</h1> <span><?php echo $_SESSION['login']; ?> , Please fill in the form to create a new category.</span>
+        	<h1>View category's informations</h1> <span><?php echo $_SESSION['login']; ?> , Please see all the informations of this category.</span>
         </div><!--pagetitle-->
         
         <div class="maincontent">

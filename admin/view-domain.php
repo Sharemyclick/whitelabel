@@ -63,7 +63,7 @@ jQuery(document).ready(function (){
           
         </div><!--breadcrumbwidget-->
       <div class="pagetitle">
-        	<h1>View Forms</h1> <span><strong><?php echo ucfirst($_SESSION['login']); ?></strong> , please see all the forms. </span>
+        	<h1>View Domains</h1> <span><strong><?php echo ucfirst($_SESSION['login']); ?></strong> , please see all the domains. </span>
         </div><!--pagetitle-->
         
         <div class="maincontent">
