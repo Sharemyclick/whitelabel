@@ -96,7 +96,7 @@ jQuery(document).ready(function (){
             $fichier = strtr($fichier, 
                         'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
                 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
-            $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
+            //$fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
 
             $return = move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $fichier); // If the function returns TRUE, it worked
               

@@ -145,6 +145,15 @@ jQuery('[id=li-dashboard]').removeClass('active');
                                     <label>Pid name</label>
                                     <span class="field"><input type="text" name="name" class="input-xxlarge" required="required" /></span>
                                 </p>
+                                <p>
+                            <label>Status *</label>
+                            <span class="field">
+                                <select name="status" id="status" class="status">
+                                        <option value="active"> Active</option>
+                                        <option value="non-active"> Non-active</option>
+                                </select>  
+                            </span>
+                        </p>
                         </div><!--#wiz1step2_1-->
                         
                         <div id="wiz1step2_2" class="formwiz">

@@ -2,6 +2,16 @@
 //it includes parameters connection
 include('conf.php');
 
+//ACTIVATION AND DESACTIVATION of the status
+if(isset($_POST['deactivate']))
+{
+    $bdd->exec('UPDATE display SET status = "non-active" WHERE id='.$id_display);
+}
+if(isset($_POST['activate']))
+{
+    $bdd->exec('UPDATE display SET status = "active" WHERE id='.$id_display);
+}
+?>
 ?>
 
 <!DOCTYPE html>
@@ -149,7 +159,29 @@ jQuery( "#pid_name" ).change(function() {
 								</span>
 								</span>
 									<span class="field">Currently : <span id="divColor" style="width:80px;height:20px;">text</span></span>
-                            </p>							
+                            </p>
+                            <p>
+                            <label>Status *</label>
+                            <span class="field">
+                                <?php 
+                                            if ($row['status']=='active')
+                                            {
+                                                ?><input type="button" class="btn btn-success" value="Status : Active">
+                                                    &nbsp;  <input  type="submit" class="btn" name="deactivate" value='Deactivate the status'> 
+                                                <?php ;
+                                            
+                                            }
+                                            if  ($row['status']=='non-active')
+                                            {
+                                                ?><input type="button" class="btn btn-danger" value="Status : Non-active"  > 
+                                                &nbsp;  <input  type="submit" class="btn" name="activate" value='Activate the status'>
+                                                <?php ;
+                                            }
+                                            
+                                        ?>
+                            </span>
+                        </p>
+                            
                             <p class="stdformbutton">
                                 <button class="btn btn-primary">Submit Button</button>
                                 <button type="reset" class="btn">Reset Button</button>

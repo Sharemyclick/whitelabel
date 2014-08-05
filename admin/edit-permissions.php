@@ -221,6 +221,15 @@ if(isset($_POST['submitChanges'])){
                             <td class="centeralign"><input type="checkbox" name="assign-pid|5" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='assign-pid' AND admin_rights_id = 5");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                             <td class="centeralign"><input type="checkbox" name="assign-pid|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='assign-pid' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
                         </tr>
+                        <tr>
+                            <td class="centeralign">Un-assign PID </td>
+                            <td class="centeralign"><input type="checkbox" name="unassign-pid|1" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='unassign-pid' AND admin_rights_id = 1");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="unassign-pid|2" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='unassign-pid' AND admin_rights_id = 2");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="unassign-pid|3" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='unassign-pid' AND admin_rights_id = 3");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="unassign-pid|4" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='unassign-pid' AND admin_rights_id = 4");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="unassign-pid|5" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='unassign-pid' AND admin_rights_id = 5");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                            <td class="centeralign"><input type="checkbox" name="unassign-pid|6" <?php  $req = $bdd->query("SELECT * FROM permissions WHERE menu='unassign-pid' AND admin_rights_id = 6");if($req->rowCount() > 0){ ?> checked <?php }?> /></td>
+                        </tr>
 					   	
                        <tr>
                         <td colspan="9" class="leftalign"><strong>QUOTE PERMISSIONS</strong></td>

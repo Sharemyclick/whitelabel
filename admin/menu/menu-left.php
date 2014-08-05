@@ -77,7 +77,12 @@
                             $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'assign-pid' and admin_rights_id = ".$_SESSION['right']);
                             if($req_menu->rowCount() > 0){?>
                             <li><a href="assign-affiliate-pid.php">Assign PID to an affiliate</a></li>
-                            <?php }?>                            
+                            <?php }?>   
+                            <?php
+                            $req_menu = $bdd->query("SELECT * FROM permissions WHERE menu = 'unassign-pid' and admin_rights_id = ".$_SESSION['right']);
+                            if($req_menu->rowCount() > 0){?>
+                            <li><a href="unassign-pid.php">Un-assign PID </a></li>
+                            <?php }?>   
                         </ul>
                     </li> 
                     

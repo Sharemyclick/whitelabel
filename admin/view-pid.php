@@ -1,6 +1,15 @@
 <?php
 // it includes parameters of connection
 include('conf.php');
+//ACTIVATION AND DESACTIVATION of the status
+if(isset($_POST['deactivate']))
+{
+    $bdd->exec('UPDATE pid SET status = "non-active" WHERE id='.$_POST['id']);
+}
+if(isset($_POST['activate']))
+{
+    $bdd->exec('UPDATE pid SET status = "active" WHERE id='.$_POST['id']);
+}
 
 ?>
 <!DOCTYPE html>
@@ -93,15 +102,10 @@ include('conf.php');
                 <li>&nbsp;</li>
                 <li class="fixed"><a href="" class="skin-layout fixed"></a></li>
                 <li class="wide"><a href="" class="skin-layout wide"></a></li>
-            </ul><!--skins-->
-        	<ul class="breadcrumb">
-                <li><a href="dashboard.html">Home</a> <span class="divider">/</span></li>
-                <li><a href="table-static.html">Tables</a> <span class="divider">/</span></li>
-                <li class="active">Static Table</li>
-            </ul>
+            
         </div><!--breadcrumbs-->
         <div class="pagetitle">
-        	<h1>Pid Table</h1> <span>This is a sample description for the page...</span>
+        	<h1>Pid Table</h1> <span></span>
         </div><!--pagetitle-->
         
         <div class="maincontent">
@@ -110,6 +114,8 @@ include('conf.php');
 			<h4 class="widgettitle">List of all pids</h4><small>Please make sure you replace the <strong><span style="color:red;">"xxxxx"</span></strong> by the name of the quizz. You have the choice between <span style="color:green;">"iphone5c"</span>, <span style="color:green;">"minibarsmeg"</span> or <span style="color:green;">"nespressocitiz"</span></small>
             	<table class="table table-bordered">
                     <colgroup>
+                        <col class="con0" />
+                        <col class="con1" />
                         <col class="con0" />
                         <col class="con1" />
                         <col class="con0" />
@@ -127,29 +133,68 @@ include('conf.php');
                             <th class="centeralign">Pid pixel</th>
                             <th class="centeralign">Tracking Link</th>
                             <th class="centeralign">Color</th>
-                            
+                            <th class="centeralign">Assigned to:</th>
+                            <th class="centeralign">Status</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <form name="form_pid" class="stdform stdform2" method="post" action="" enctype="multipart/form-data">
+
 					<?php
 					// data from table pid
-					$reponse = $bdd->query('SELECT * FROM pid') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
+					$reqPid = $bdd->query('SELECT * FROM pid') or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
 					
-					while ($donnees = $reponse->fetch())
+					while ($pid = $reqPid->fetch())
 						{?>
                         <tr>
                             <td class="centeralign"><input type="checkbox" /></td>
-                            <td class="centeralign"> <?php echo $donnees['name']; ?> </td>
-                            <td class="centeralign"> <?php echo $donnees['price']; ?></td>
-                            <td class="centeralign"> <?php echo $donnees['country'] ?> </td>
-                            <td class="centeralign"><textarea name="pixel" id="pixel"> <?php echo $donnees['pixel']; ?></textarea></td>
-                            <td class="centeralign"><a href="http://xxxxxxxxxx.actu-du-jour.com/?pid=<?php echo $donnees['id'];?>&firstname=&lastname=&gender=&email=&city=&postal_code=&address=&telephone=&dob=&country=" target="_blank">http://concours.sharemydeal.net/?pid=<?php echo $donnees['id']; ?>&firstname=&lastname=&gender=&email=&city=</br>&postal_code=&address=&telephone=&dob=&country=</td>
-                            <td class="centeralign" > <div id="divColor" style="text-align:center" > <div style="width:20px;height:20px;background-color:<?php if(!empty($donnees['color_code'])){echo $donnees['color_code'];} ?>"> </div> </td>
-
-                        </tr>
+                            <td class="centeralign"> <?php echo $pid['name']; ?> </td>
+                            <td class="centeralign"> <?php echo $pid['price']; ?></td>
+                            <td class="centeralign"> <?php echo $pid['country'] ?> </td>
+                            <td class="centeralign"><textarea name="pixel" id="pixel"> <?php echo $pid['pixel']; ?></textarea></td>
+                            <td class="centeralign"><a href="http://xxxxxxxxxx.actu-du-jour.com/?pid=<?php echo $pid['id'];?>&firstname=&lastname=&gender=&email=&city=&postal_code=&address=&telephone=&dob=&country=" target="_blank">http://concours.sharemydeal.net/?pid=<?php echo $pid['id']; ?>&firstname=&lastname=&gender=&email=&city=</br>&postal_code=&address=&telephone=&dob=&country=</td>
+                            <td class="centeralign" > <div id="divColor" style="text-align:center" > <div style="width:20px;height:20px;background-color:<?php if(!empty($pid['color_code'])){echo $pid['color_code'];} ?>"> </div> </td>
+                            <td class="centeralign" >
+                                <?php
+                                $reqAffiliate = $bdd->query('SELECT * FROM admin_pid LEFT JOIN admin ON admin_pid.admin_id=admin.id WHERE admin_pid.pid_id='.$pid['id']) or die(print_r($bdd->errorInfo())); // On traque l'erreur s'il y en a une
+                                while ($affiliate = $reqAffiliate->fetch())
+                                        {?>
+                                <span>
+                                    <i class="icon-user"></i> <?php echo $affiliate['company']; ?> </br>
+                                </span>
+                                <?php } ?>
+                                                
+                            </td>
+                            <td class="centeralign" >
+                               <p>
+                            <span class="field">
+                                <?php 
+                                            if ($pid['status']=='active')
+                                            {
+                                                ?><input type="button" class="btn btn-success" value="Status : Active">
+                                                    &nbsp;  <input  type="submit" class="btn" name="deactivate" value='Deactivate the status'> 
+                                                <?php ;
+                                            
+                                            }
+                                            if  ($pid['status']=='non-active')
+                                            {
+                                                ?><input type="button" class="btn btn-danger" value="Status : Non-active"  > 
+                                                &nbsp;  <input  type="submit" class="btn" name="activate" value='Activate the status'>
+                                                <?php ;
+                                            }
+                                            
+                                        ?>
+                            </span>
+                                   <input type="hidden" name="id" value="<?php echo $pid['id'];?>">
+                        </p>
+                                                
+                            </td>                   
+                        </tr> </form>     
+  
 						<?php }
 					?>
-                    </tbody>
+                    </tbody>                               
+
                 </table>
                 
                 <div class="divider15"></div>

@@ -96,7 +96,7 @@ jQuery(document).ready(function (){
             $fichier = strtr($fichier, 
                         'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
                 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
-            $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
+            //$fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
 
             $return = move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $fichier); // If the function returns TRUE, it worked
               
@@ -126,7 +126,7 @@ jQuery(document).ready(function (){
             $fichier2 = strtr($fichier2, 
                         'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
                 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
-            $fichier2 = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier2);
+            //$fichier2 = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier2);
 
             $return2 = move_uploaded_file($_FILES['picto']['tmp_name'], $dossier2 . $fichier2); // If the function returns TRUE, it worked
               
